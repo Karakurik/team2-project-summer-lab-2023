@@ -11,4 +11,9 @@ class HelpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHelpBinding.bind(view)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }

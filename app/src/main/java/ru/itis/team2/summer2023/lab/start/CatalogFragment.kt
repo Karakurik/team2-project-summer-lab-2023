@@ -11,4 +11,9 @@ class CatalogFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCatalogBinding.bind(view)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }

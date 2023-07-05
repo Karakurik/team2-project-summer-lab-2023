@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/game_graph"
+    app:startDestination="@id/kitchenFragment">
+
+    <fragment
+        android:id="@+id/bathFragment"
+        android:name="ru.itis.team2.summer2023.lab.game.BathFragment"
+        android:label="fragment_bath"
+        tools:layout="@layout/fragment_bath" />
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="ru.itis.team2.summer2023.lab.game.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info" />
+    <fragment
+        android:id="@+id/kitchenFragment"
+        android:name="ru.itis.team2.summer2023.lab.game.KitchenFragment"
+        android:label="fragment_kitchen"
+        tools:layout="@layout/fragment_kitchen" />
+    <fragment
+        android:id="@+id/playFragment"
+        android:name="ru.itis.team2.summer2023.lab.game.PlayFragment"
+        android:label="fragment_play"
+        tools:layout="@layout/fragment_play" />
+    <fragment
+        android:id="@+id/sleepFragment"
+        android:name="ru.itis.team2.summer2023.lab.game.SleepFragment"
+        android:label="fragment_sleep"
+        tools:layout="@layout/fragment_sleep" />
+</navigation>

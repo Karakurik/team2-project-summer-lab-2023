@@ -11,4 +11,9 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSettingsBinding.bind(view)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }
