@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".start.StartFragment">
 
     <TextView
@@ -13,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="158dp"
         android:gravity="center"
-        android:text="CATch"
+        android:text="CATcha"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
