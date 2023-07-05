@@ -19,7 +19,7 @@ class StartFragment : Fragment(R.layout.fragment_start) {
             btnToGame.setOnClickListener {
                 val intent = Intent(requireContext(), GameActivity::class.java)
                 startActivity(intent)
-                
+            }
             btnCatalog.setOnClickListener {
                 findNavController().navigate(R.id.action_startFragment_to_catalogFragment)
             }
