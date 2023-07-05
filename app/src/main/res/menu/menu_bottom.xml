@@ -3,23 +3,23 @@
 
     <item
         android:id="@+id/kitchenFragment"
-        android:icon="@drawable/for_item"
-        android:title="кухня" />
-    <item
-        android:id="@+id/playFragment"
-        android:icon="@drawable/for_item"
-        android:title="улица"/>
+        android:icon="@drawable/food"
+        android:title="@string/kitchen" />
     <item
         android:id="@+id/bathFragment"
-        android:icon="@drawable/for_item"
-        android:title="ванная"/>
+        android:icon="@drawable/bath"
+        android:title="@string/bath"/>
+    <item
+        android:id="@+id/playFragment"
+        android:icon="@drawable/game"
+        android:title="@string/play"/>
     <item
         android:id="@+id/sleepFragment"
-        android:icon="@drawable/for_item"
-        android:title="спальня"/>
+        android:icon="@drawable/sleep"
+        android:title="@string/sleep"/>
     <item
         android:id="@+id/infoFragment"
-        android:icon="@drawable/for_item"
-        android:title="инфа"/>
+        android:icon="@drawable/stats"
+        android:title="@string/info"/>
 
 </menu>
