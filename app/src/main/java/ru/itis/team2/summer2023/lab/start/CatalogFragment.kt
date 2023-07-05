@@ -12,4 +12,9 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCatalogBinding.bind(view)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }

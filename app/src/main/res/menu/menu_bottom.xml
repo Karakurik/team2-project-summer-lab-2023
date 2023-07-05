@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/kitchenFragment"
+        android:icon="@drawable/for_item"
+        android:title="кухня" />
+    <item
+        android:id="@+id/playFragment"
+        android:icon="@drawable/for_item"
+        android:title="улица"/>
+    <item
+        android:id="@+id/bathFragment"
+        android:icon="@drawable/for_item"
+        android:title="ванная"/>
+    <item
+        android:id="@+id/sleepFragment"
+        android:icon="@drawable/for_item"
+        android:title="спальня"/>
+    <item
+        android:id="@+id/infoFragment"
+        android:icon="@drawable/for_item"
+        android:title="инфа"/>
+
+</menu>

@@ -12,4 +12,9 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHelpBinding.bind(view)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }

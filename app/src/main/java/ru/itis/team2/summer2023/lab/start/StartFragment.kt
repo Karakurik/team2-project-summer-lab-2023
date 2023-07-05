@@ -1,11 +1,13 @@
 package ru.itis.team2.summer2023.lab.start
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import ru.itis.team2.summer2023.lab.R
 import ru.itis.team2.summer2023.lab.databinding.FragmentStartBinding
+import ru.itis.team2.summer2023.lab.game.GameActivity
 
 class StartFragment : Fragment(R.layout.fragment_start) {
     private var binding: FragmentStartBinding? = null
@@ -13,11 +15,15 @@ class StartFragment : Fragment(R.layout.fragment_start) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentStartBinding.bind(view)
 
-        binding?.run {
+        binding?.run{
+            btnToGame.setOnClickListener {
+                val intent = Intent(requireContext(), GameActivity::class.java)
+                startActivity(intent)
+                
             btnCatalog.setOnClickListener {
                 findNavController().navigate(R.id.action_startFragment_to_catalogFragment)
             }
-
+            
             btnHelp.setOnClickListener {
                 findNavController().navigate(R.id.action_startFragment_to_helpFragment)
             }
