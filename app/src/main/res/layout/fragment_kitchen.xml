@@ -6,13 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".game.KitchenFragment">
 
+    <ImageButton
+        android:id="@+id/btn_advice"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:layout_constraintStart_toEndOf="@id/rv_kitchen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rv_kitchen"
+        app:layout_constraintBottom_toBottomOf="@id/rv_kitchen"
+        android:src="@drawable/question" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_kitchen"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_advice"
         app:layout_constraintStart_toStartOf="parent"
         tools:listitem="@layout/rv_item" />
 

@@ -37,7 +37,7 @@ class GameActivity : AppCompatActivity() {
         }
 
         binding.btnBreedInfo.setOnClickListener {
-            val breedInfoFragment = BreedInfoFragment(15)
+            val breedInfoFragment = BreedInfoFragment()
             val manager = supportFragmentManager
             breedInfoFragment.show(manager, "myDialog")
         }

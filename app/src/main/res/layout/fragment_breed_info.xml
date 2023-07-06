@@ -1,63 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".game.BreedInfoFragment"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginVertical="4dp"
-        android:textSize="24sp"
-        android:text="@string/breed_info_title"
-        app:layout_constraintBottom_toTopOf="@+id/divider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"/>
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginVertical="4dp"
-        android:layout_marginBottom="9dp"
-        android:background="#130101"
-        app:layout_constraintBottom_toTopOf="@+id/sv"
-        app:layout_constraintEnd_toEndOf="@id/title"
-        app:layout_constraintStart_toStartOf="@id/title"
-        app:layout_constraintTop_toBottomOf="@id/title" />
-
-    <!--TODO Scroll view размеры-->
-    <ScrollView
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".game.BreedInfoFragment"
         android:id="@+id/sv"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layout_constraintEnd_toEndOf="@id/title"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/title"
-        app:layout_constraintTop_toBottomOf="@+id/divider">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <TextView
-            android:id="@+id/message"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            app:layout_constraintHeight_default="spread"
-            app:layout_constraintWidth_default="spread"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginVertical="4dp"
-            android:text="Устная передача — самый древний способ передачи знаний в истории человечества. После изобретения древними цивилизациями систем записи люди начали использовать для письма почти всё, на чём можно писать — глиняные таблички, кору дерева, листы металла и т. п.
-        Таблички
-        Шумерская глиняная табличка с клинописью
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            android:textSize="24sp"
+            android:gravity="top|start"
+            android:text="@string/breed_info_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        Табличку можно определить как физически прочный, надёжный носитель письменной информации, относительно удобный в повседневном использовании и транспортировке. Пишущим средством в этом случае, как правило, выступало стило. Можно выделить два основных типа табличек: глиняные (например, у населения долины между Тигром и Евфратом), которые часто использовались для письма клинописью[4], и восковые. Последние представляли собой дощечки, покрытые слоем воска, в то время как глиняные полностью состояли из глины и после нанесения надписей часто обжигались для придания им дополнительной прочности. После этой процедуры, соответственно, изменить текст было уже невозможно; напротив, записи на восковых табличках можно было стереть и использовать носитель повторно. В Древнем Риме дощечки часто скрепляли друг с другом. Известно, что существовали «диптихи», «триптихи» и «полиптихи» (соответственно две, три и много дощечек)[5], образуя тем самым своеобразный прототип современной книги — кодекс[6].
-        Свитки
-        Винченцо Фоппа. Юный Цицерон за книгой"
-            android:textSize="18sp" />
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="4dp"
+            android:background="#130101"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintEnd_toEndOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/title"/>
+
+        <TextView
+            android:gravity="top|start"
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="16dp"
+            android:text="@string/breed_info_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>

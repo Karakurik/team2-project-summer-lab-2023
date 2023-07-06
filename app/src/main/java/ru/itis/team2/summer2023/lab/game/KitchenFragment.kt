@@ -21,7 +21,7 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
 
         /*binding?.tvName?.setOnClickListener {
             adapter?.updateDataset(
-                KikorikRepository.list.subList(0, Random.nextInt(8))
+                KitchenRepository.list.subList(0, Random.nextInt(8))
             )
         }
          */
