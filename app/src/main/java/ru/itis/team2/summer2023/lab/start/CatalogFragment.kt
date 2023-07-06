@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import ru.itis.team2.summer2023.lab.CatAdapter
 import ru.itis.team2.summer2023.lab.CatRepository

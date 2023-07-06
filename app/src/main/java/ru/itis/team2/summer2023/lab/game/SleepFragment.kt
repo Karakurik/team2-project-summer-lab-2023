@@ -8,9 +8,22 @@ import ru.itis.team2.summer2023.lab.databinding.FragmentSleepBinding
 
 class SleepFragment : Fragment(R.layout.fragment_sleep) {
     private var binding: FragmentSleepBinding? = null
+    private var light: Boolean = true
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSleepBinding.bind(view)
+
+        binding?.run {
+            btnLight.setOnClickListener {
+                val img = activity?.findViewById<View>(R.id.iv_cat)
+                var back = 0
+                if (light) back = R.drawable.ic_launcher_background
+                else back = R.drawable.breed_info_background
+                img?.setBackgroundResource(back)
+                light = !light
+                //ну тут меняется фон типо включили выключили свет
+            }
+        }
     }
 
     override fun onDestroyView() {

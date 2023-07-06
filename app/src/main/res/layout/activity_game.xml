@@ -10,13 +10,12 @@
         android:id="@+id/game_container"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         app:defaultNavHost="true"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@id/bnv"
         app:layout_constraintEnd_toEndOf="@id/bnv"
         app:layout_constraintStart_toStartOf="@id/bnv"
-        app:layout_constraintTop_toBottomOf="@id/iv_cat"
         app:navGraph="@navigation/game_graph" />
 
     <ImageButton
@@ -46,7 +45,8 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="50dp"
         app:layout_constraintDimensionRatio="1:1"
-        android:src="@drawable/breed_info_background"
+        android:src="@drawable/for_item"
+        android:background="@drawable/breed_info_background"
         app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
