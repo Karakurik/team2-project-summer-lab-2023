@@ -1,6 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Base.Theme.Team2projectsummerlab2023" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:fontFamily">@font/pixeleum</item>
+        <item name="alertDialogTheme">@style/MyAlertDialogTheme</item>
+    </style>
+
+    <style name="MyAlertDialogTheme" parent="@android:style/Theme.Material.Light.Dialog.Alert">
+        <item name="android:textAppearanceSmall">@style/MyTextAppearance</item>
+        <item name="android:textAppearanceMedium">@style/MyTextAppearance</item>
+        <item name="android:textAppearanceLarge">@style/MyTextAppearance</item>
+
+    </style>
+
+    <style name="MyTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/pixeleum</item>
     </style>
 
     <style name="Theme.Team2projectsummerlab2023" parent="Base.Theme.Team2projectsummerlab2023" />

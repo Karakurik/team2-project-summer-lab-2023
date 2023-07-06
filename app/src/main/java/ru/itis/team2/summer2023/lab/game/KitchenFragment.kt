@@ -1,5 +1,6 @@
 package ru.itis.team2.summer2023.lab.game
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -13,11 +14,19 @@ import ru.itis.team2.summer2023.lab.game.RecycleView.KitchenRepository
 class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
     private var binding: FragmentKitchenBinding? = null
     private var adapter: ProductAdapter? = null
+    private val advice: String = "kitchen advice"
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentKitchenBinding.bind(view)
 
         initAdapter()
+
+        binding?.btnAdvice?.setOnClickListener {
+            val dialog = AlertDialog.Builder(activity, R.style.MyAlertDialogTheme).setMessage(advice).create()
+            dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
+            dialog.show()
+        }
 
         /*binding?.tvName?.setOnClickListener {
             adapter?.updateDataset(

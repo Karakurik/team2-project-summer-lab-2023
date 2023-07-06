@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">CATcha</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="kitchen">кухня</string>
     <string name="play">улица</string>
@@ -11,5 +10,6 @@
     <string name="breed_info_title">порода</string>
     <string name="breed1">уличная</string>
     <string name="breed2">голубая русская</string>
-    <string name="breed3">шоталндская</string>
+    <string name="breed3">шотландская</string>
+    <string name="advice">совет</string>
 </resources>
