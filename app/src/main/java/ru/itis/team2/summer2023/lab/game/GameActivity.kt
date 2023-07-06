@@ -17,6 +17,8 @@ import ru.itis.team2.summer2023.lab.start.StartActivity
 
 class GameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGameBinding
+    private var breed: String = "порода"
+    private var breed_info: String = "инфа о породе"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
@@ -37,9 +39,11 @@ class GameActivity : AppCompatActivity() {
         }
 
         binding.btnBreedInfo.setOnClickListener {
-            val breedInfoFragment = BreedInfoFragment()
-            val manager = supportFragmentManager
-            breedInfoFragment.show(manager, "myDialog")
+            val dialog = AlertDialog.Builder(this, R.style.MyAlertDialogTheme)
+                .setTitle(breed)
+                .setMessage(breed_info).create()
+            dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
+            dialog.show()
         }
     }
 }

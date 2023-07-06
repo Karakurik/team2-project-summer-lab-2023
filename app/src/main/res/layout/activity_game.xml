@@ -46,7 +46,7 @@
         android:layout_marginTop="50dp"
         app:layout_constraintDimensionRatio="1:1"
         android:src="@drawable/for_item"
-        android:background="@drawable/breed_info_background"
+        android:background="@drawable/dialog_background"
         app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
