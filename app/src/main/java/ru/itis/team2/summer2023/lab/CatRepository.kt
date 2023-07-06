@@ -1,9 +1,12 @@
 package ru.itis.team2.summer2023.lab
 
+import android.content.res.Resources
+import ru.itis.team2.summer2023.lab.start.StartActivity
+
 object CatRepository {
     val list: List<Cat> = listOf(
-        Cat(1, "уличная", 1, R.raw.cat, true),
-        Cat(2, "hdhvhbhjvb.knb", 2, R.raw.cat, false),
-        Cat(3, "нвсв",3, R.raw.cat, false)
+        Cat(1, R.string.breed1, 0, R.raw.cat, true, 100, 100, 100, 100),
+        Cat(2, R.string.breed2, 1, R.raw.cat, true, 100, 100, 100, 100),
+        Cat(3, R.string.breed3, 5, R.raw.cat, false, 100, 100, 100, 100)
     )
 }

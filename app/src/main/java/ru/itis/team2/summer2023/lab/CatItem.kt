@@ -20,11 +20,14 @@ class CatItem(
 
     fun onBind(cat: Cat) {
         binding.run {
-            tvBreed.text = "Порода: ${cat.breed}"
-            tvCarePoints.text = "Очки заботы: ${cat.carePoints}"
+            tvBreed.text = "Порода: ${binding.root.context.getString(cat.breed)}"
+
             if (cat.open) {
                 glide.load(cat.urlImage)
                     .into(ivImage)
+            }
+            else {
+                tvCarePoints.text = "Очки заботы: ${cat.carePoints}"
             }
 
             root.setOnClickListener {
