@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.core.content.edit
 import androidx.navigation.fragment.NavHostFragment
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
+import com.google.gson.Gson
+
 import ru.itis.team2.summer2023.lab.Cat
 import ru.itis.team2.summer2023.lab.CatRepository
 import ru.itis.team2.summer2023.lab.R
@@ -24,7 +24,7 @@ class StartActivity : AppCompatActivity() {
 
         val controller = (supportFragmentManager.findFragmentById(R.id.start_container) as NavHostFragment).navController
 
-        getSharedPreferences("", MODE_PRIVATE).edit().clear().apply(); // это временно чтобы удалять предыдущие записанные значения потом уберем
+        //getSharedPreferences("", MODE_PRIVATE).edit().clear().apply(); // это временно чтобы удалять предыдущие записанные значения потом уберем
         initSharedPreference()
     }
 
@@ -32,13 +32,12 @@ class StartActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("", MODE_PRIVATE)
 
         if (sharedPreferences.all.isEmpty()) {
-            val moshi = Moshi.Builder().build()
-            val adapter: JsonAdapter<Cat> = moshi.adapter(Cat::class.java)
+            val gson = Gson()
 
             var index: Int = 1
             for (cat in CatRepository.list) {
                 sharedPreferences.edit {
-                    putString("$index cat", adapter.toJson(cat))
+                    putString("$index cat", gson.toJson(cat))
                 }
                 index++
             }
