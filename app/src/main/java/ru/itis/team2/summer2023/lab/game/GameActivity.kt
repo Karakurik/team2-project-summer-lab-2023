@@ -23,7 +23,7 @@ class GameActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val cat = findCat(this.getSharedPreferences("", Context.MODE_PRIVATE).getInt("last_cat_id", 1))
-        cat?.urlImage?.let { binding.ivCat.setImageResource(it) }
+        // cat?.urlImage?.let { binding.ivCat.setImageResource(it) }
 
         val fragment = supportFragmentManager.findFragmentById(R.id.game_container) as? NavHostFragment
         val controller = fragment?.navController
