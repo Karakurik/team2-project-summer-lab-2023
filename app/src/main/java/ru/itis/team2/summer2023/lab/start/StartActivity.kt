@@ -45,6 +45,7 @@ class StartActivity : AppCompatActivity() {
             sharedPreferences.edit {
                 putInt("last_cat_id", 1)
                 putInt("care_points", 1)
+                putInt("number_of_cats", 1)
             }
         }
     }

@@ -3,6 +3,7 @@ package ru.itis.team2.summer2023.lab
 import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView.GONE
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
@@ -25,6 +26,7 @@ class CatItem(
             if (cat.open) {
                 glide.load(cat.urlImage)
                     .into(ivImage)
+                tvCarePoints.visibility = GONE
             }
             else {
                 tvCarePoints.text = "Очки заботы: ${cat.carePoints}"

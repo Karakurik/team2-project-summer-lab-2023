@@ -30,6 +30,7 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
         sharedPreferences = this.activity?.getSharedPreferences("", Context.MODE_PRIVATE)
 
         binding!!.tvCarePoints.text = "Очки заботы: ${sharedPreferences?.getInt("care_points", 0)}"
+        binding!!.tvStatistic.text = "Число доступных котов: ${sharedPreferences?.getInt("number_of_cats", 1)}"
         initAdapter()
     }
 
@@ -41,7 +42,7 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
                 sharedPreferences?.edit {
                     putInt("last_cat_id", cat.id)
                 }
-                Log.e("last cat id", "${cat.id}")
+
                 val intent = Intent(requireContext(), GameActivity::class.java)
                 startActivity(intent)
             }
@@ -52,14 +53,17 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
                     .setPositiveButton("Да") { dialog, which ->
 
                         val points = sharedPreferences?.getInt("care_points", 0)
+                        val number = sharedPreferences?.getInt("number_of_cats", 1)
 
                         if (points!! >= cat.carePoints) {
                             sharedPreferences?.edit {
                                 putInt("care_points", points - cat.carePoints)
                                 putInt("last_cat_id", cat.id)
                                 putString("${cat.id} cat", replaceCatOpen(cat.id))
+                                putInt("number_of_cats", number!! + 1)
                             }
                             binding!!.tvCarePoints.text = "Очки заботы: ${sharedPreferences?.getInt("care_points", 0)}"
+                            binding!!.tvStatistic.text = "Число доступных котов: ${sharedPreferences?.getInt("number_of_cats", 1)}"
                             val intent = Intent(requireContext(), GameActivity::class.java)
                             startActivity(intent)
                         }
