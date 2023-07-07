@@ -1,6 +1,7 @@
 package ru.itis.team2.summer2023.lab
 
 data class Cat(
+
     val id: Int,
     val breed: Int,
     var carePoints: Int,
@@ -11,4 +12,5 @@ data class Cat(
     var sleep: Int,
     var purity: Int,
     val breed_info : Int
+
 )
