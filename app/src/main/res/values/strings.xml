@@ -11,5 +11,8 @@
     <string name="breed1">уличная</string>
     <string name="breed2">голубая русская</string>
     <string name="breed3">шотландская</string>
+    <string name="breed1_info">уличная кошка что вы хотите узнать она беспородная</string>
+    <string name="breed2_info">голубая русская одна из лучших пород мира</string>
+    <string name="breed3_info">шотландская просто милашечка тоже одна из лучших пород мира</string>
     <string name="advice">совет</string>
 </resources>

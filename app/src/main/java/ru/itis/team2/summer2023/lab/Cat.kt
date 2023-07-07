@@ -3,8 +3,9 @@ package ru.itis.team2.summer2023.lab
 data class Cat(
     val id: Int,
     val breed: Int,
-    val carePoints: Int,
+    var carePoints: Int,
     val urlImage: Int,
+    val breed_info : Int
     var open: Boolean,
     var hunger: Int,
     var happy: Int,
