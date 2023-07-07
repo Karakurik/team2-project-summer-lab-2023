@@ -1,17 +1,18 @@
 package ru.itis.team2.summer2023.lab.start
 
 import android.app.AlertDialog
-import android.annotation.SuppressLint
 import android.content.Context
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.content.edit
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
+import ru.itis.team2.summer2023.lab.Cat
 import ru.itis.team2.summer2023.lab.CatAdapter
 import ru.itis.team2.summer2023.lab.CatRepository
 import ru.itis.team2.summer2023.lab.R
@@ -28,14 +29,19 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
 
         sharedPreferences = this.activity?.getSharedPreferences("", Context.MODE_PRIVATE)
 
-        initAdapter()
         binding!!.tvCarePoints.text = "Очки заботы: ${sharedPreferences?.getInt("care_points", 0)}"
+        initAdapter()
     }
 
     private fun initAdapter() {
+        updateRepository()
         adapter = CatAdapter(CatRepository.list, Glide.with(this)
         ) { cat ->
             if (cat.open) {
+                sharedPreferences?.edit {
+                    putInt("last_cat_id", cat.id)
+                }
+                Log.e("last cat id", "${cat.id}")
                 val intent = Intent(requireContext(), GameActivity::class.java)
                 startActivity(intent)
             }
@@ -50,6 +56,8 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
                         if (points!! >= cat.carePoints) {
                             sharedPreferences?.edit {
                                 putInt("care_points", points - cat.carePoints)
+                                putInt("last_cat_id", cat.id)
+                                putString("${cat.id} cat", replaceCatOpen(cat.id))
                             }
                             binding!!.tvCarePoints.text = "Очки заботы: ${sharedPreferences?.getInt("care_points", 0)}"
                             val intent = Intent(requireContext(), GameActivity::class.java)
@@ -67,6 +75,31 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
         }
         binding?.rvCat?.adapter = adapter
     }
+
+    private fun updateRepository() {
+        var index = 1
+        var newCat: Cat
+        var string: String?
+
+        for (cat in CatRepository.list) {
+            string = sharedPreferences?.getString("$index cat", "")
+            newCat = Gson().fromJson(string, Cat::class.java)
+            cat.open = newCat.open
+            cat.happy = newCat.happy
+            cat.hunger = newCat.hunger
+            cat.purity = newCat.purity
+            cat.sleep = newCat.sleep
+            index++
+        }
+    }
+
+    private fun replaceCatOpen(id: Int): String? {
+        val string = sharedPreferences?.getString("$id cat", "")
+        val cat = Gson().fromJson(string, Cat::class.java)
+        cat.open = true
+        return Gson().toJson(cat)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null

@@ -5,9 +5,9 @@ data class Cat(
     val breed: Int,
     val carePoints: Int,
     val urlImage: Int,
-    val open: Boolean,
-    val hunger: Int,
-    val happy: Int,
-    val sleep: Int,
-    val purity: Int
+    var open: Boolean,
+    var hunger: Int,
+    var happy: Int,
+    var sleep: Int,
+    var purity: Int
 )
