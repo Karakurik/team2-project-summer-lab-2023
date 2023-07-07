@@ -27,9 +27,9 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
         binding = FragmentCatalogBinding.bind(view)
 
         sharedPreferences = this.activity?.getSharedPreferences("", Context.MODE_PRIVATE)
-        // binding!!.tvCarePoints.text = "${binding!!.tvCarePoints.text} ${sharedPreferences?.getInt("care_points", 0)}"
-        initAdapter()
 
+        initAdapter()
+        binding!!.tvCarePoints.text = "Очки заботы: ${sharedPreferences?.getInt("care_points", 0)}"
     }
 
     private fun initAdapter() {
@@ -51,7 +51,7 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
                             sharedPreferences?.edit {
                                 putInt("care_points", points - cat.carePoints)
                             }
-
+                            binding!!.tvCarePoints.text = "Очки заботы: ${sharedPreferences?.getInt("care_points", 0)}"
                             val intent = Intent(requireContext(), GameActivity::class.java)
                             startActivity(intent)
                         }
