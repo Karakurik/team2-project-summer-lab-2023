@@ -69,7 +69,7 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
                         }
                         else {
                             AlertDialog.Builder(activity)
-                                .setTitle("У вас недостаточно очков счастья.")
+                                .setTitle("У вас недостаточно очков заботы.")
                                 .setPositiveButton("Ок") {dialog, which ->}
                                 .show()
                         }
@@ -84,7 +84,7 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
         var index = 1
         var newCat: Cat
         var string: String?
-
+        //связка айди с индексами??
         for (cat in CatRepository.list) {
             string = sharedPreferences?.getString("$index cat", "")
             newCat = Gson().fromJson(string, Cat::class.java)

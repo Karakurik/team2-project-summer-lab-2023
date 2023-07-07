@@ -5,12 +5,14 @@ data class Cat(
     val id: Int,
     val breed: Int,
     var carePoints: Int,
-    val urlImage: Int,
+    val catalogImage: Int,
+    val animations: CatAnimation,
     var open: Boolean,
     var hunger: Int,
     var happy: Int,
     var sleep: Int,
     var purity: Int,
-    val breed_info : Int
+    val breed_info : Int,
+    var age: Long,
 
 )

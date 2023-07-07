@@ -44,7 +44,7 @@ class StartActivity : AppCompatActivity() {
             // инициализация начального количества очков и айди уличного кота
             sharedPreferences.edit {
                 putInt("last_cat_id", 1)
-                putInt("care_points", 1)
+                putInt("care_points", 0)
                 putInt("number_of_cats", 1)
             }
         }

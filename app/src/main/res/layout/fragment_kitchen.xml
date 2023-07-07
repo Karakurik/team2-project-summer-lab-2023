@@ -10,11 +10,12 @@
         android:id="@+id/btn_advice"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        app:layout_constraintStart_toEndOf="@id/rv_kitchen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/rv_kitchen"
+        android:backgroundTint="#00FFFFFF"
+        android:src="@drawable/question"
         app:layout_constraintBottom_toBottomOf="@id/rv_kitchen"
-        android:src="@drawable/question" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rv_kitchen"
+        app:layout_constraintTop_toTopOf="@id/rv_kitchen" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_kitchen"
