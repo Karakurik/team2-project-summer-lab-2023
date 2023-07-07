@@ -9,5 +9,6 @@ data class Cat(
     val hunger: Int,
     val happy: Int,
     val sleep: Int,
-    val purity: Int
+    val purity: Int,
+    val breed_info : Int
 )
