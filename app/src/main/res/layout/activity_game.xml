@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="8dp"
+        android:backgroundTint="#00FFFFFF"
         android:src="@drawable/home"
         app:layout_constraintEnd_toStartOf="@id/btn_breed_info"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,8 +33,9 @@
         android:id="@+id/btn_breed_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="8dp"
         android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="8dp"
+        android:backgroundTint="#00FFFFFF"
         android:src="@drawable/question"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,7 +47,6 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="50dp"
         app:layout_constraintDimensionRatio="1:1"
-        android:src="@drawable/for_item"
         app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"

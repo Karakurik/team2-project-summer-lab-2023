@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item android:drawable="@drawable/meow1"
+        android:duration="125"/>
+    <item android:drawable="@drawable/meow2"
+        android:duration="125"/>
+    <item android:drawable="@drawable/meow3"
+        android:duration="125"/>
+    <item android:drawable="@drawable/meow4"
+        android:duration="125"/>
+    <item android:drawable="@drawable/meow5"
+        android:duration="125"/>
+    <item android:drawable="@drawable/meow6"
+        android:duration="125"/>
+    <item android:drawable="@drawable/meow7"
+        android:duration="125"/>
+</animation-list>

@@ -3,11 +3,15 @@ package ru.itis.team2.summer2023.lab.game
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.edit
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.Gson
 import ru.itis.team2.summer2023.lab.Cat
 import ru.itis.team2.summer2023.lab.CatRepository
 import ru.itis.team2.summer2023.lab.R
@@ -23,7 +27,17 @@ class GameActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val cat = findCat(this.getSharedPreferences("", Context.MODE_PRIVATE).getInt("last_cat_id", 1))
+        if (cat != null && cat.age == 0L) {
+            cat.age = System.currentTimeMillis()
+            this.getSharedPreferences("", Context.MODE_PRIVATE).edit {
+                putString("${cat.id} cat", Gson().toJson(cat))
+            }
+        }
         // cat?.urlImage?.let { binding.ivCat.setImageResource(it) }
+        binding.ivCat.foreground = AppCompatResources.getDrawable(applicationContext, cat!!.animations.idle)
+        val idleAnim = binding.ivCat.foreground as AnimationDrawable
+        idleAnim.start()
+
 
         val fragment = supportFragmentManager.findFragmentById(R.id.game_container) as? NavHostFragment
         val controller = fragment?.navController
@@ -40,7 +54,7 @@ class GameActivity : AppCompatActivity() {
         }
 
         binding.btnBreedInfo.setOnClickListener {
-            val dialog = cat?.breed?.let { it1 ->
+            val dialog = cat.breed.let { it1 ->
                 cat.breed_info.let { it2 ->
                     AlertDialog.Builder(this, R.style.MyAlertDialogTheme)
                         .setTitle(it1)
