@@ -26,13 +26,17 @@ class GameActivity : AppCompatActivity() {
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val cat = findCat(this.getSharedPreferences("", Context.MODE_PRIVATE).getInt("last_cat_id", 1))
-        if (cat != null && cat.age == 0L) {
-            cat.age = System.currentTimeMillis()
-            this.getSharedPreferences("", Context.MODE_PRIVATE).edit {
-                putString("${cat.id} cat", Gson().toJson(cat))
-            }
-        }
+        val sharedPreferences = this.getSharedPreferences("", Context.MODE_PRIVATE);
+
+        val int = sharedPreferences.getInt("last_cat_id", 1)
+        val string = sharedPreferences.getString("$int cat", "")
+        val cat = Gson().fromJson(string, Cat::class.java)
+//        if (cat != null && cat.age == 0L) {
+//            cat.age = System.currentTimeMillis()
+//            this.getSharedPreferences("", Context.MODE_PRIVATE).edit {
+//                putString("${cat.id} cat", Gson().toJson(cat))
+//            }
+//        }
         // cat?.urlImage?.let { binding.ivCat.setImageResource(it) }
         binding.ivCat.foreground = AppCompatResources.getDrawable(applicationContext, cat!!.animations.idle)
         val idleAnim = binding.ivCat.foreground as AnimationDrawable
@@ -64,12 +68,5 @@ class GameActivity : AppCompatActivity() {
             dialog?.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
             dialog?.show()
         }
-    }
-
-    fun findCat(id: Int) : Cat? {
-        for(cat in CatRepository.list){
-            if (cat.id == id) return cat
-        }
-        return null
     }
 }

@@ -15,4 +15,13 @@ data class Cat(
     val breed_info : Int,
     var age: Long,
 
-)
+){
+    companion object {
+        fun findCat(id: Int): Cat? {
+            for (cat in CatRepository.list) {
+                if (cat.id == id) return cat
+            }
+            return null
+        }
+    }
+}
