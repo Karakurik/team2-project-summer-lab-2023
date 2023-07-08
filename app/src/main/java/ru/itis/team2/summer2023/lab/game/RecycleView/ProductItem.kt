@@ -19,7 +19,7 @@ class ProductItem (
                     tvCarePoints.visibility = GONE
                 }
                 else {
-                    tvCarePoints.text = "Очки заботы: ${product.carePoints}"
+                    tvCarePoints.text = "ОЗ: ${product.carePoints}"
                 }
 
                 root.setOnClickListener {
