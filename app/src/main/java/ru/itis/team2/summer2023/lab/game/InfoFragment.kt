@@ -16,23 +16,14 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
         binding = FragmentInfoBinding.bind(view)
 
         //временная дичь
-        val cat = this.activity?.getSharedPreferences("", Context.MODE_PRIVATE)?.let {
-            findCat(
-                it.getInt("last_cat_id", 1))
-        }
-        binding?.run {
-            tvAgeValue.text = ((System.currentTimeMillis() - cat!!.age)/ 1000L).toString()
-        }
+//        val cat = Cat.findCat(requireActivity().getSharedPreferences("", Context.MODE_PRIVATE).getInt("last_cat_id", 1))
+//        binding?.run {
+//            tvAgeValue.text = ((System.currentTimeMillis() - cat!!.age)/ 1000L).toString()
+//        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
-    }
-    fun findCat(id: Int) : Cat? {
-        for(cat in CatRepository.list){
-            if (cat.id == id) return cat
-        }
-        return null
     }
 }
