@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import ru.itis.team2.summer2023.lab.Cat
 import ru.itis.team2.summer2023.lab.CatRepository
+import ru.itis.team2.summer2023.lab.Constants
 import ru.itis.team2.summer2023.lab.R
 import ru.itis.team2.summer2023.lab.databinding.FragmentInfoBinding
 
@@ -15,11 +16,11 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentInfoBinding.bind(view)
 
-        //временная дичь
-//        val cat = Cat.findCat(requireActivity().getSharedPreferences("", Context.MODE_PRIVATE).getInt("last_cat_id", 1))
-//        binding?.run {
-//            tvAgeValue.text = ((System.currentTimeMillis() - cat!!.age)/ 1000L).toString()
-//        }
+        val sharedPreferences = this.requireActivity().getSharedPreferences("", Context.MODE_PRIVATE);
+        val cat = Cat.getCat(sharedPreferences.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF), sharedPreferences)
+        binding?.run {
+            tvAgeValue.text = ((System.currentTimeMillis() - cat.age)/ 1000L).toString()
+        }
     }
 
     override fun onDestroyView() {
