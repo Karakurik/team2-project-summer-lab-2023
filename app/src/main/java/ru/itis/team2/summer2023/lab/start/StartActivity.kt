@@ -28,7 +28,7 @@ class StartActivity : AppCompatActivity() {
 
         val controller = (supportFragmentManager.findFragmentById(R.id.start_container) as NavHostFragment).navController
 
-        // getSharedPreferences("", MODE_PRIVATE).edit().clear().apply(); // это временно чтобы удалять предыдущие записанные значения потом уберем
+        //getSharedPreferences("", MODE_PRIVATE).edit().clear().apply(); // это временно чтобы удалять предыдущие записанные значения потом уберем
         initSharedPreference()
     }
 
@@ -52,24 +52,20 @@ class StartActivity : AppCompatActivity() {
                 putInt("number_of_cats", Constants.START_CAT_AMOUNT)
             }
 
-            val sharedPreferencesProduct = getSharedPreferences("products", MODE_PRIVATE)
-
             index = 1
             for (product in KitchenRepository.list) {
-                sharedPreferencesProduct.edit {
+                sharedPreferences.edit {
                     putString("$index product", gson.toJson(product))
+                    index++
                 }
-                index++
             }
 
-            val sharedPreferencesGame = getSharedPreferences("games", MODE_PRIVATE)
-
             index = 1
-            for (game in PlayRepository.list) {
-                sharedPreferencesGame.edit {
-                    putString("$index game", gson.toJson(game))
+            for (product in PlayRepository.list) {
+                sharedPreferences.edit {
+                    putString("$index game", gson.toJson(product))
+                    index++
                 }
-                index++
             }
         }
     }

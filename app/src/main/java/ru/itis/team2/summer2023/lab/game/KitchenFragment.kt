@@ -12,6 +12,7 @@ import androidx.core.content.edit
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
+import ru.itis.team2.summer2023.lab.Cat
 import ru.itis.team2.summer2023.lab.R
 import ru.itis.team2.summer2023.lab.databinding.FragmentKitchenBinding
 import ru.itis.team2.summer2023.lab.databinding.RvItemBinding
@@ -65,9 +66,9 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
                             if (points!! >= product.carePoints) {
                                 sharedPreferences?.edit {
                                     putInt("care_points", points - product.carePoints)
+                                    putString("${product.id} product", replaceProductOpen(product.id))
                                 }
-                                replaceProductOpen(product.id)
-                                // здесь или не здесь но надо как то обновить изображение списка
+                                findNavController().navigate(R.id.action_kitchenFragment_self)
                             }
                             else {
                                 AlertDialog.Builder(activity)
@@ -84,14 +85,11 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
         binding?.rvKitchen?.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
 
-    private fun replaceProductOpen(id: Int) {
-        val shp = this.activity?.getSharedPreferences("products", Context.MODE_PRIVATE)
-        val string = shp?.getString("$id product", "")
+    private fun replaceProductOpen(id: Int): String? {
+        val string = sharedPreferences?.getString("$id product", "")
         val product = Gson().fromJson(string, Product::class.java)
         product.open = true
-        shp?.edit {
-            putString("$id cat", Gson().toJson(product))
-        }
+        return Gson().toJson(product)
     }
 
     private fun updateRepository() {
@@ -100,8 +98,7 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
         var string: String?
 
         for (product in KitchenRepository.list) {
-            string = this.activity?.getSharedPreferences("products", Context.MODE_PRIVATE)
-                ?.getString("$index product", "")
+            string = sharedPreferences?.getString("$index product", "")
             newProduct = Gson().fromJson(string, Product::class.java)
             product.open = newProduct.open
             index++
