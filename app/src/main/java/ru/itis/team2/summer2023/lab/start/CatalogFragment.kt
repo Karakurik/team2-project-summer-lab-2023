@@ -59,8 +59,8 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
                             sharedPreferences?.edit {
                                 putInt("care_points", points - cat.carePoints)
                                 putInt("last_cat_id", cat.id)
-                                Cat.setOpen(true, cat, sharedPreferences!!)
-                                //putString("${cat.id} cat", replaceCatOpen(cat.id))
+                                // Cat.setOpen(true, cat, sharedPreferences!!)
+                                putString("${cat.id} cat", replaceCatOpen(cat.id))
                                 putInt("number_of_cats", number!! + 1)
                             }
                             binding!!.tvCarePoints.text = "Очки заботы: ${sharedPreferences?.getInt("care_points", 0)}"
@@ -79,6 +79,13 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
             }
         }
         binding?.rvCat?.adapter = adapter
+    }
+
+    private fun replaceCatOpen(id: Int): String? {
+        val string = sharedPreferences?.getString("$id cat", "")
+        val cat = Gson().fromJson(string, Cat::class.java)
+        cat.open = true
+        return Gson().toJson(cat)
     }
 
     private fun updateRepository() {

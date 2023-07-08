@@ -19,12 +19,20 @@
         android:id="@+id/kitchenFragment"
         android:name="ru.itis.team2.summer2023.lab.game.KitchenFragment"
         android:label="fragment_kitchen"
-        tools:layout="@layout/fragment_kitchen" />
+        tools:layout="@layout/fragment_kitchen" >
+        <action
+            android:id="@+id/action_kitchenFragment_self"
+            app:destination="@id/kitchenFragment" />
+    </fragment>
     <fragment
         android:id="@+id/playFragment"
         android:name="ru.itis.team2.summer2023.lab.game.PlayFragment"
         android:label="fragment_play"
-        tools:layout="@layout/fragment_play" />
+        tools:layout="@layout/fragment_play" >
+        <action
+            android:id="@+id/action_playFragment_self"
+            app:destination="@id/playFragment" />
+    </fragment>
     <fragment
         android:id="@+id/sleepFragment"
         android:name="ru.itis.team2.summer2023.lab.game.SleepFragment"
