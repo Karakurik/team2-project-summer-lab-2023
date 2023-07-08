@@ -30,14 +30,16 @@
 
         <View
             android:id="@+id/divider"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="@color/divider"
+            app:layout_constraintEnd_toEndOf="@id/iv_image"
+            app:layout_constraintStart_toStartOf="@id/iv_image"
             app:layout_constraintTop_toBottomOf="@id/iv_image"/>
 
         <TextView
             android:id="@+id/tv_breed"
-            android:layout_width="165dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="12dp"
@@ -52,7 +54,7 @@
 
         <TextView
             android:id="@+id/tv_care_points"
-            android:layout_width="165dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:textSize="12sp"
             tools:text="5 points"

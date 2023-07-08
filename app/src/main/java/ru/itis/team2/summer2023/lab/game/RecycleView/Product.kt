@@ -4,8 +4,7 @@ data class Product(
     val id: Int,
     val name: String,
     val picture: Int,
-    val cost: Int,
+    val carePoints: Int,
     val restoring: Int,
-    val open: Boolean
-    //count?
+    var open: Boolean
 )
