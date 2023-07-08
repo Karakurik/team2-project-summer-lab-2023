@@ -15,6 +15,9 @@ import ru.itis.team2.summer2023.lab.Constants
 import ru.itis.team2.summer2023.lab.R
 import ru.itis.team2.summer2023.lab.databinding.ActivityStartBinding
 import ru.itis.team2.summer2023.lab.game.GameActivity
+import ru.itis.team2.summer2023.lab.game.KitchenFragment
+import ru.itis.team2.summer2023.lab.game.RecycleView.KitchenRepository
+import ru.itis.team2.summer2023.lab.game.RecycleView.PlayRepository
 
 class StartActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStartBinding
@@ -25,7 +28,7 @@ class StartActivity : AppCompatActivity() {
 
         val controller = (supportFragmentManager.findFragmentById(R.id.start_container) as NavHostFragment).navController
 
-        //getSharedPreferences("", MODE_PRIVATE).edit().clear().apply(); // это временно чтобы удалять предыдущие записанные значения потом уберем
+        // getSharedPreferences("", MODE_PRIVATE).edit().clear().apply(); // это временно чтобы удалять предыдущие записанные значения потом уберем
         initSharedPreference()
     }
 
@@ -47,6 +50,26 @@ class StartActivity : AppCompatActivity() {
                 putInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
                 putInt("care_points", Constants.START_CARE_POINTS)
                 putInt("number_of_cats", Constants.START_CAT_AMOUNT)
+            }
+
+            val sharedPreferencesProduct = getSharedPreferences("products", MODE_PRIVATE)
+
+            index = 1
+            for (product in KitchenRepository.list) {
+                sharedPreferencesProduct.edit {
+                    putString("$index product", gson.toJson(product))
+                }
+                index++
+            }
+
+            val sharedPreferencesGame = getSharedPreferences("games", MODE_PRIVATE)
+
+            index = 1
+            for (game in PlayRepository.list) {
+                sharedPreferencesGame.edit {
+                    putString("$index game", gson.toJson(game))
+                }
+                index++
             }
         }
     }
