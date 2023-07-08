@@ -11,6 +11,7 @@ import com.google.gson.Gson
 
 import ru.itis.team2.summer2023.lab.Cat
 import ru.itis.team2.summer2023.lab.CatRepository
+import ru.itis.team2.summer2023.lab.Constants
 import ru.itis.team2.summer2023.lab.R
 import ru.itis.team2.summer2023.lab.databinding.ActivityStartBinding
 import ru.itis.team2.summer2023.lab.game.GameActivity
@@ -43,9 +44,9 @@ class StartActivity : AppCompatActivity() {
             }
             // инициализация начального количества очков и айди уличного кота
             sharedPreferences.edit {
-                putInt("last_cat_id", 1)
-                putInt("care_points", 1)
-                putInt("number_of_cats", 1)
+                putInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
+                putInt("care_points", Constants.START_CARE_POINTS)
+                putInt("number_of_cats", Constants.START_CAT_AMOUNT)
             }
         }
     }

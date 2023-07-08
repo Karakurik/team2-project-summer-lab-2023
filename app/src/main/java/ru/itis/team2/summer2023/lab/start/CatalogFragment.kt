@@ -59,7 +59,8 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
                             sharedPreferences?.edit {
                                 putInt("care_points", points - cat.carePoints)
                                 putInt("last_cat_id", cat.id)
-                                putString("${cat.id} cat", replaceCatOpen(cat.id))
+                                Cat.setOpen(true, cat, sharedPreferences!!)
+                                //putString("${cat.id} cat", replaceCatOpen(cat.id))
                                 putInt("number_of_cats", number!! + 1)
                             }
                             binding!!.tvCarePoints.text = "Очки заботы: ${sharedPreferences?.getInt("care_points", 0)}"
@@ -84,7 +85,7 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
         var index = 1
         var newCat: Cat
         var string: String?
-        //связка айди с индексами??
+
         for (cat in CatRepository.list) {
             string = sharedPreferences?.getString("$index cat", "")
             newCat = Gson().fromJson(string, Cat::class.java)
@@ -95,13 +96,6 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
             cat.sleep = newCat.sleep
             index++
         }
-    }
-
-    private fun replaceCatOpen(id: Int): String? {
-        val string = sharedPreferences?.getString("$id cat", "")
-        val cat = Gson().fromJson(string, Cat::class.java)
-        cat.open = true
-        return Gson().toJson(cat)
     }
 
     override fun onDestroyView() {

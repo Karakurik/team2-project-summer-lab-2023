@@ -17,7 +17,7 @@ object CatRepository {
                 R.drawable.cat_to_sleep_animation,
                 R.drawable.cat_sleep_animation,
                 R.drawable.cat_from_sleep_animation),
-            true, 100, 100, 100, 100, R.string.breed1_info,0),
+            true, 100, 100, 100, 100, R.string.breed1_info,0, false),
         Cat(2, R.string.breed2, 1, R.drawable.cat_idle1,
             CatAnimation(
                 R.drawable.cat_idle_animation,
@@ -30,7 +30,7 @@ object CatRepository {
                 R.drawable.cat_to_sleep_animation,
                 R.drawable.cat_sleep_animation,
                 R.drawable.cat_from_sleep_animation),
-            false, 100, 100, 100, 100, R.string.breed2_info, 0),
+            false, 100, 100, 100, 100, R.string.breed2_info, 0, false),
         Cat(3, R.string.breed3, 5, R.drawable.cat_idle1,
             CatAnimation(
                 R.drawable.cat_idle_animation,
@@ -43,6 +43,6 @@ object CatRepository {
                 R.drawable.cat_to_sleep_animation,
                 R.drawable.cat_sleep_animation,
                 R.drawable.cat_from_sleep_animation),
-            false, 100, 100, 100, 100, R.string.breed3_info, 0)
+            false, 100, 100, 100, 100, R.string.breed3_info, 0, false)
     )
 }
