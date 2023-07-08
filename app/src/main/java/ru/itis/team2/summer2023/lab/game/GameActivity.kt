@@ -13,16 +13,21 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import ru.itis.team2.summer2023.lab.Cat
 import ru.itis.team2.summer2023.lab.CatRepository
 import ru.itis.team2.summer2023.lab.Constants
 import ru.itis.team2.summer2023.lab.R
 import ru.itis.team2.summer2023.lab.databinding.ActivityGameBinding
 import ru.itis.team2.summer2023.lab.start.StartActivity
+import kotlin.coroutines.CoroutineContext
 
 
 class GameActivity : AppCompatActivity() {
@@ -33,19 +38,17 @@ class GameActivity : AppCompatActivity() {
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sharedPreferences = this.getSharedPreferences("", Context.MODE_PRIVATE);
+        sharedPreferences = this.getSharedPreferences("", Context.MODE_PRIVATE)
 
-        val cat = Cat.getCat(sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF), sharedPreferences!!)
+        val id = sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
+        val cat = Cat.getCat(id, sharedPreferences!!)
         if (cat.age == 0L) {
             Cat.setAge(System.currentTimeMillis(), cat, sharedPreferences!!)
         }
+        initAnimations(cat)
 
-        binding.ivCat.foreground = AppCompatResources.getDrawable(applicationContext, cat.animations.idle)
-        val idleAnim = binding.ivCat.foreground as AnimationDrawable
-        idleAnim.start()
-
-
-        val fragment = supportFragmentManager.findFragmentById(R.id.game_container) as? NavHostFragment
+        val fragment =
+            supportFragmentManager.findFragmentById(R.id.game_container) as? NavHostFragment
         val controller = fragment?.navController
 
         findViewById<BottomNavigationView>(R.id.bnv_main).apply {
@@ -74,6 +77,17 @@ class GameActivity : AppCompatActivity() {
             lowCatStats()
         }
     }
+    fun initAnimations(cat: Cat){
+        binding.ivCatIdle.setBackgroundResource(cat.animations.idle)
+        binding.ivCatSad.setBackgroundResource(cat.animations.sad)
+        binding.ivCatEat.setBackgroundResource(cat.animations.eat)
+        binding.ivCatMeow.setBackgroundResource(cat.animations.meow)
+        binding.ivCatWash.setBackgroundResource(cat.animations.wash)
+        binding.ivCatToSleep.setBackgroundResource(cat.animations.toSleep)
+        binding.ivCatSleeping.setBackgroundResource(cat.animations.sleep)
+        binding.ivCatFromSleep.setBackgroundResource(cat.animations.fromSleep)
+    }
+
     suspend fun lowCatStats() = coroutineScope{
         launch {
             while (true){

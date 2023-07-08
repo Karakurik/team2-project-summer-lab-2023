@@ -10,6 +10,7 @@ data class Cat(
     val breed: Int,
     var carePoints: Int,
     val catalogImage: Int,
+    var currentAnimation: Int,
     val animations: CatAnimation,
     var open: Boolean,
     var hunger: Int,
@@ -34,6 +35,13 @@ data class Cat(
         fun setHunger(value: Int, cat: Cat, sharedPreferences: SharedPreferences){
             cat.hunger = value
             findCat(cat.id)!!.hunger = value
+            sharedPreferences.edit {
+                putString("${cat.id} cat", Gson().toJson(cat))
+            }
+        }
+        fun setCurrentAnimation(value: Int, cat: Cat, sharedPreferences: SharedPreferences){
+            cat.currentAnimation = value
+            findCat(cat.id)!!.currentAnimation = value
             sharedPreferences.edit {
                 putString("${cat.id} cat", Gson().toJson(cat))
             }

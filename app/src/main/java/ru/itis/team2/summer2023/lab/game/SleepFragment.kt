@@ -17,7 +17,7 @@ class SleepFragment : Fragment(R.layout.fragment_sleep) {
 
         binding?.run {
             btnLight.setOnClickListener {
-                val img = activity?.findViewById<View>(R.id.iv_cat)
+                val img = activity?.findViewById<View>(R.id.cl_game)
                 var back = 0
                 if (light) back = R.drawable.ic_launcher_background
                 else back = R.drawable.dialog_background
