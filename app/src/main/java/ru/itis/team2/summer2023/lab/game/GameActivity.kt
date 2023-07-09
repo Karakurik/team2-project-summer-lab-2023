@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -19,12 +18,19 @@ import ru.itis.team2.summer2023.lab.Constants
 import ru.itis.team2.summer2023.lab.R
 import ru.itis.team2.summer2023.lab.databinding.ActivityGameBinding
 import ru.itis.team2.summer2023.lab.start.StartActivity
+import java.util.Timer
+import java.util.TimerTask
 import ru.itis.team2.summer2023.lab.Constants.Companion.BACKGROUND_COLOR
 
 
 class GameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGameBinding
     var sharedPreferences: SharedPreferences? = null
+    var animations: HashMap<Int,AnimationDrawable> = HashMap()
+    private var catUpdateTimer: Timer? = null
+    private var catUpdateTask: CatUpdateTask? = null
+    private var pbUpdateTimer: Timer? = null
+    private var pbUpdateTask: PBUpdateTask? = null
     var mp: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,11 +47,25 @@ class GameActivity : AppCompatActivity() {
             ?.let { binding.clGame.setBackgroundColor(it) }
 
         val id = sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
-        val cat = Cat.getCat(id, sharedPreferences!!)
+        var cat = Cat.getCat(id, sharedPreferences!!)
         if (cat.age == 0L) {
-            Cat.setAge(System.currentTimeMillis(), cat, sharedPreferences!!)
+            cat = Cat.setAge(System.currentTimeMillis(), cat, sharedPreferences!!)
         }
-            //initAnimations(cat)
+        initAnimations(cat)
+        binding.tvCarePointsValue.text = "Очки заботы: ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
+        if (!cat.isBusy){
+            cat = setDefaultAnimation(cat)
+        }
+
+        catUpdateTimer?.cancel()
+        catUpdateTimer = Timer()
+        catUpdateTask = CatUpdateTask(this)
+        catUpdateTimer!!.schedule(catUpdateTask, Constants.CAT_UPDATE_VALUES, Constants.CAT_UPDATE_VALUES)
+
+        pbUpdateTimer?.cancel()
+        pbUpdateTimer = Timer()
+        pbUpdateTask = PBUpdateTask(this)
+        pbUpdateTimer!!.schedule(pbUpdateTask, 0, Constants.PB_UPDATE_VALUES)
 
         val fragment =
             supportFragmentManager.findFragmentById(R.id.game_container) as? NavHostFragment
@@ -73,9 +93,88 @@ class GameActivity : AppCompatActivity() {
             dialog?.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
             dialog?.show()
         }
-        GlobalScope.launch {
-            lowCatStats()
+    }
+    class PBUpdateTask(private val activity: GameActivity): TimerTask(){
+        override fun run() {
+            activity.runOnUiThread {
+                var cat = Cat.getCat(
+                    activity.sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF),
+                    activity.sharedPreferences!!
+                )
+                activity.binding.pbHappy.progress = cat.happy
+                activity.binding.pbHunger.progress = cat.hunger
+                activity.binding.pbPurity.progress = cat.purity
+                activity.binding.pbSleep.progress = cat.sleep
+            }
         }
+
+    }
+    class CatUpdateTask(private val activity: GameActivity): TimerTask(){
+        override fun run() {
+            activity.runOnUiThread {
+                var cat = Cat.getCat(
+                    activity.sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF),
+                    activity.sharedPreferences!!
+                )
+                if (!cat.isBusy) {
+                    cat = activity.setDefaultAnimation(cat)
+                    cat = Cat.setBusy(true, cat, activity.sharedPreferences!!)
+                    cat = if (cat.hunger - Constants.LOW_FACTOR > 0) {
+                        Cat.setHunger(
+                            cat.hunger - Constants.LOW_FACTOR,
+                            cat,
+                            activity.sharedPreferences!!
+                        )
+                    } else Cat.setHunger(0, cat, activity.sharedPreferences!!)
+                    cat = if (cat.sleep - Constants.LOW_FACTOR > 0) {
+                        Cat.setSleep(
+                            cat.sleep - Constants.LOW_FACTOR,
+                            cat,
+                            activity.sharedPreferences!!
+                        )
+                    } else Cat.setSleep(0, cat, activity.sharedPreferences!!)
+                    cat = if (cat.happy - Constants.LOW_FACTOR > 0) {
+                        Cat.setHappy(
+                            cat.happy - Constants.LOW_FACTOR,
+                            cat,
+                            activity.sharedPreferences!!
+                        )
+                    } else Cat.setHappy(0, cat, activity.sharedPreferences!!)
+                    cat = if (cat.purity - Constants.LOW_FACTOR > 0) {
+                        Cat.setPurity(
+                            cat.purity - Constants.LOW_FACTOR,
+                            cat,
+                            activity.sharedPreferences!!
+                        )
+                    } else Cat.setPurity(0, cat, activity.sharedPreferences!!)
+                    Cat.setBusy(false, cat, activity.sharedPreferences!!)
+                }
+            }
+        }
+    }
+    fun setDefaultAnimation(cat:Cat): Cat{
+        val score = getTotalScore(cat)
+        if (score < 50 && animations[cat.animations.sad]?.alpha != 255){
+            if (animations[cat.currentAnimation]?.isRunning == true){
+                animations[cat.currentAnimation]?.stop()
+            }
+            animations[cat.animations.idle]?.alpha = 0
+            animations[cat.animations.sad]?.alpha = 255
+            animations[cat.animations.sad]?.start()
+            Cat.setCurrentAnimation(cat.animations.sad, cat, sharedPreferences!!)
+        } else if (score > 50){
+            if (animations[cat.currentAnimation]?.isRunning == true){
+                animations[cat.currentAnimation]?.stop()
+            }
+            animations[cat.animations.sad]?.alpha = 0
+            animations[cat.animations.idle]?.alpha = 255
+            animations[cat.animations.idle]?.start()
+            Cat.setCurrentAnimation(cat.animations.idle, cat, sharedPreferences!!)
+        }
+        return Cat.getCat(cat.id, sharedPreferences!!)
+    }
+    fun getTotalScore(cat: Cat): Int{
+        return ((cat.hunger+cat.happy+cat.purity+cat.sleep)*100/400)
     }
 
     override fun onResume(){
@@ -104,39 +203,14 @@ class GameActivity : AppCompatActivity() {
         binding.ivCatToSleep.setBackgroundResource(cat.animations.toSleep)
         binding.ivCatSleeping.setBackgroundResource(cat.animations.sleep)
         binding.ivCatFromSleep.setBackgroundResource(cat.animations.fromSleep)
-    }
-
-    suspend fun lowCatStats() = coroutineScope{
-        launch {
-            while (true){
-                delay(Constants.WAIT)
-
-                val cat = Cat.getCat(sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF), sharedPreferences!!)
-                if (cat.hunger > 0){
-                    Cat.setHunger(cat.hunger - Constants.LOW_FACTOR, cat, sharedPreferences!!)
-                }
-                if (cat.sleep > 0){
-                    Cat.setSleep(cat.sleep - Constants.LOW_FACTOR, cat, sharedPreferences!!)
-                }
-                if (cat.happy > 0){
-                    Cat.setHappy(cat.happy - Constants.LOW_FACTOR, cat, sharedPreferences!!)
-                }
-                if (cat.purity > 0){
-                    Cat.setPurity(cat.purity - Constants.LOW_FACTOR, cat, sharedPreferences!!)
-                }
-            }
-        }
-        launch{
-            while (true) {
-                val cat = Cat.getCat(
-                    sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF),
-                    sharedPreferences!!
-                )
-                binding.pbHappy.progress = cat.happy
-                binding.pbHunger.progress = cat.hunger
-                binding.pbPurity.progress = cat.purity
-                binding.pbSleep.progress = cat.sleep
-            }
-        }
+        animations[cat.animations.idle] = binding.ivCatIdle.background as AnimationDrawable
+        animations[cat.animations.sad] = binding.ivCatSad.background as AnimationDrawable
+        animations[cat.animations.eat] = binding.ivCatEat.background as AnimationDrawable
+        animations[cat.animations.meow] = binding.ivCatMeow.background as AnimationDrawable
+        animations[cat.animations.wash] = binding.ivCatWash.background as AnimationDrawable
+        animations[cat.animations.toSleep] = binding.ivCatToSleep.background as AnimationDrawable
+        animations[cat.animations.sleep] = binding.ivCatSleeping.background as AnimationDrawable
+        animations[cat.animations.fromSleep] = binding.ivCatFromSleep.background as AnimationDrawable
+        animations.forEach{(_: Int, animation: AnimationDrawable) -> animation.alpha = 0}
     }
 }

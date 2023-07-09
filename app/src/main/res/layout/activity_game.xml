@@ -63,8 +63,7 @@
         app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible" />
+        app:layout_constraintTop_toTopOf="parent" />
     <ImageView
         android:id="@+id/iv_cat_meow"
         android:layout_width="0dp"
@@ -75,8 +74,7 @@
         app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toTopOf="parent" />
     <ImageView
         android:id="@+id/iv_cat_eat"
         android:layout_width="0dp"
@@ -87,8 +85,7 @@
         app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toTopOf="parent" />
     <ImageView
         android:id="@+id/iv_cat_to_sleep"
         android:layout_width="0dp"
@@ -99,8 +96,7 @@
         app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toTopOf="parent" />
     <ImageView
         android:id="@+id/iv_cat_from_sleep"
         android:layout_width="0dp"
@@ -111,8 +107,7 @@
         app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toTopOf="parent" />
     <ImageView
         android:id="@+id/iv_cat_sleeping"
         android:layout_width="0dp"
@@ -123,8 +118,7 @@
         app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toTopOf="parent" />
     <ImageView
         android:id="@+id/iv_cat_wash"
         android:layout_width="0dp"
@@ -135,8 +129,7 @@
         app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.cardview.widget.CardView
@@ -150,12 +143,13 @@
         android:layout_marginHorizontal="12dp"
         app:cardCornerRadius="10dp"
         android:elevation="50dp">
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bnv_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/menu_bottom" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bnv_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/menu_bottom" />
     </androidx.cardview.widget.CardView>
 
     <ProgressBar
@@ -198,6 +192,17 @@
         app:layout_constraintStart_toEndOf="@+id/pb_happy"
         app:layout_constraintTop_toBottomOf="@id/btn_to_start"
         />
+
+    <TextView
+        android:id="@+id/tv_care_points_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/btn_to_start"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!--app:itemIconTint="@drawable/bottom_navigation_selector"
         app:itemTextColor="@drawable/bottom_navigation_selector"-->
