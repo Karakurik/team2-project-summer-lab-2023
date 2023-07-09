@@ -22,7 +22,7 @@ data class Cat(
     var isBusy: Boolean
 ){
     companion object {
-        fun findCat(id: Int): Cat? {
+        private fun findCat(id: Int): Cat? {
             for (cat in CatRepository.list) {
                 if (cat.id == id) return cat
             }
@@ -33,8 +33,9 @@ data class Cat(
             return Gson().fromJson(string, Cat::class.java)
         }
         fun setHunger(value: Int, cat: Cat, sharedPreferences: SharedPreferences){
-            cat.hunger = value
-            findCat(cat.id)!!.hunger = value
+            val settingValue: Int = if (value > 100) 100 else value
+            cat.hunger = settingValue
+            findCat(cat.id)!!.hunger = settingValue
             sharedPreferences.edit {
                 putString("${cat.id} cat", Gson().toJson(cat))
             }
@@ -47,22 +48,25 @@ data class Cat(
             }
         }
         fun setHappy(value: Int, cat: Cat, sharedPreferences: SharedPreferences){
-            cat.happy = value
-            findCat(cat.id)!!.happy = value
+            val settingValue: Int = if (value > 100) 100 else value
+            cat.happy = settingValue
+            findCat(cat.id)!!.happy = settingValue
             sharedPreferences.edit {
                 putString("${cat.id} cat", Gson().toJson(cat))
             }
         }
         fun setSleep(value: Int, cat: Cat, sharedPreferences: SharedPreferences){
-            cat.sleep = value
-            findCat(cat.id)!!.sleep = value
+            val settingValue: Int = if (value > 100) 100 else value
+            cat.sleep = settingValue
+            findCat(cat.id)!!.sleep = settingValue
             sharedPreferences.edit {
                 putString("${cat.id} cat", Gson().toJson(cat))
             }
         }
         fun setPurity(value: Int, cat: Cat, sharedPreferences: SharedPreferences){
-            cat.purity = value
-            findCat(cat.id)!!.purity = value
+            val settingValue: Int = if (value > 100) 100 else value
+            cat.purity = settingValue
+            findCat(cat.id)!!.purity = settingValue
             sharedPreferences.edit {
                 putString("${cat.id} cat", Gson().toJson(cat))
             }

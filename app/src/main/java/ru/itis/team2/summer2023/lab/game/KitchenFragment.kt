@@ -4,15 +4,30 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.drawable.AnimationDrawable
+import android.opengl.Visibility
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.edit
+import androidx.loader.content.AsyncTaskLoader
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import ru.itis.team2.summer2023.lab.Cat
+import ru.itis.team2.summer2023.lab.Constants
 import ru.itis.team2.summer2023.lab.R
 import ru.itis.team2.summer2023.lab.databinding.FragmentKitchenBinding
 import ru.itis.team2.summer2023.lab.databinding.RvItemBinding
@@ -53,15 +68,23 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
             list = KitchenRepository.list,
             onItemClick = {product ->
                 if (product.open) {
-                    //делай здесь анимацию поедания продукта
-                    //насчитай очки которые дает продукт к коту по последнему ай ди
+                    val id = sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
+                    val cat = Cat.getCat(id, sharedPreferences!!)
+                    Cat.setHunger(cat.hunger + product.restoring, cat, sharedPreferences!!)
+                    if (Cat.getCat(id, sharedPreferences!!).hunger < 100){
+                        sharedPreferences?.edit {
+                            putInt("care_points", sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS) + product.carePoints)
+                        }
+                    }
+                    requireActivity().findViewById<TextView>(R.id.tv_care_points_value).text =
+                        "Очки заботы: ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
                 }
                 else {
                     AlertDialog.Builder(activity)
                         .setTitle("Хотите купить продукт?")
                         .setNegativeButton("Нет") {dialog, which ->}
                         .setPositiveButton("Да") {dialog, which ->
-                            val points = sharedPreferences?.getInt("care_points", 0)
+                            val points = sharedPreferences?.getInt("care_points", Constants.START_CARE_POINTS)
 
                             if (points!! >= product.carePoints) {
                                 sharedPreferences?.edit {
@@ -104,4 +127,5 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
             index++
         }
     }
+    
 }

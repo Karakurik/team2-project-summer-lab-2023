@@ -10,6 +10,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.content.edit
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import ru.itis.team2.summer2023.lab.Cat
@@ -59,12 +60,12 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
                             sharedPreferences?.edit {
                                 putInt("care_points", points - cat.carePoints)
                                 putInt("last_cat_id", cat.id)
-                                // Cat.setOpen(true, cat, sharedPreferences!!)
                                 putString("${cat.id} cat", replaceCatOpen(cat.id))
                                 putInt("number_of_cats", number!! + 1)
                             }
                             binding!!.tvCarePoints.text = "Очки заботы: ${sharedPreferences?.getInt("care_points", 0)}"
                             binding!!.tvStatistic.text = "Число доступных котов: ${sharedPreferences?.getInt("number_of_cats", 1)}"
+                            findNavController().navigate(R.id.action_catalogFragment_self)
                             val intent = Intent(requireContext(), GameActivity::class.java)
                             startActivity(intent)
                         }
