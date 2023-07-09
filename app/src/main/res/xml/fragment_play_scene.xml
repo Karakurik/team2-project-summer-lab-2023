@@ -19,19 +19,19 @@
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
-            android:layout_height="64dp"
+            android:layout_height="80dp"
             motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="18dp"
             motion:layout_constraintTop_toTopOf="@id/tv_score"
-            android:layout_width="64dp"
+            android:layout_width="80dp"
             android:id="@+id/iv_mouse" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
         <Constraint android:id="@+id/iv_mouse">
             <Layout
-                android:layout_width="64dp"
-                android:layout_height="64dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 motion:layout_constraintEnd_toEndOf="parent" />
         </Constraint>
     </ConstraintSet>
