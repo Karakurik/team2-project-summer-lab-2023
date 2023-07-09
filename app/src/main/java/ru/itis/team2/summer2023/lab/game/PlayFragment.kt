@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
+import ru.itis.team2.summer2023.lab.Constants.Companion.MUSIC
+import ru.itis.team2.summer2023.lab.Constants.Companion.SOUND
 import ru.itis.team2.summer2023.lab.R
 import ru.itis.team2.summer2023.lab.databinding.FragmentPlayBinding
 
@@ -21,15 +23,15 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
         val music: MediaPlayer = MediaPlayer.create(this.context, R.raw.cat)
 
         binding?.run {
-            tvScore.text = "Пойманных мышей: 0"
+            tvScore.text = getString(R.string.mouse) + " 0"
             motion.transitionToEnd()
 
             var score = 0
             ivMouse.setOnClickListener {
-                music.start()
+                if (sharedPreferences?.getBoolean(MUSIC, SOUND) == true) music.start()
 
                 score++
-                tvScore.text = "Пойманных мышей: $score"
+                tvScore.text = getString(R.string.mouse) + " $score"
                 if (score % 15 == 0) {
                     var carePoints = sharedPreferences?.getInt("care_points", 0)
                     sharedPreferences?.edit {

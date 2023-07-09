@@ -9,7 +9,7 @@ import ru.itis.team2.summer2023.lab.databinding.FragmentBathBinding
 
 class BathFragment : Fragment(R.layout.fragment_bath) {
     private var binding: FragmentBathBinding? = null
-    private val advice: String = "bath advice"
+    private val advice: Int = R.string.bath_advice
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

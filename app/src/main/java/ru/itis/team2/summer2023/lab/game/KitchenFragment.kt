@@ -26,7 +26,7 @@ import java.util.TimerTask
 class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
     private var binding: FragmentKitchenBinding? = null
     private var adapter: ProductAdapter? = null
-    private val advice: String = "kitchen advice"
+    private val advice: Int = R.string.kitchen_advice
     private var sharedPreferences: SharedPreferences? = null
     private var kitchenTimer: Timer? = null
     private var kitchenTimerTask: KitchenTimerTask? = null
