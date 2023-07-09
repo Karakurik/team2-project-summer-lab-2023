@@ -26,10 +26,6 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
 
             var score = 0
             ivMouse.setOnClickListener {
-                if (score == 0) {
-                    music.playbackParams = music.playbackParams.setSpeed(3f)
-                }
-
                 music.start()
 
                 score++

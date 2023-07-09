@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/iv_mouse"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:src="@drawable/mouse"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_score"
