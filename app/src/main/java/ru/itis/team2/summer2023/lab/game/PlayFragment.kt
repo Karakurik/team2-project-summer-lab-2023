@@ -4,6 +4,7 @@ import android.content.Context
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import ru.itis.team2.summer2023.lab.Constants.Companion.MUSIC
@@ -23,7 +24,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
         val music: MediaPlayer = MediaPlayer.create(this.context, R.raw.cat)
 
         binding?.run {
-            tvScore.text = getString(R.string.mouse) + " 0"
+            tvScore.text = "${getString(R.string.mouse)} 0"
             motion.transitionToEnd()
 
             var score = 0
@@ -31,14 +32,15 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
                 if (sharedPreferences?.getBoolean(MUSIC, SOUND) == true) music.start()
 
                 score++
-                tvScore.text = getString(R.string.mouse) + " $score"
+                tvScore.text = "${getString(R.string.mouse)} $score"
                 if (score % 15 == 0) {
                     var carePoints = sharedPreferences?.getInt("care_points", 0)
                     sharedPreferences?.edit {
                         putInt("care_points", carePoints!! + 1)
                     }
-                    // здесь ещё нужно поменять текст у текст вью который показывает количество очков заботы
+                    activity?.findViewById<TextView>(R.id.tv_care_points_value)!!.text = "${getString(R.string.care_points)} ${carePoints!! + 1}"
                 }
+                // здесь начислить очки за игру
             }
         }
     }

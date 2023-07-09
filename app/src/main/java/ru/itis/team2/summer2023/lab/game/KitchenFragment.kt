@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.edit
@@ -74,7 +75,7 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
                             }
                         }
                         requireActivity().findViewById<TextView>(R.id.tv_care_points_value).text =
-                            "Очки заботы: ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
+                            "${getString(R.string.care_points)} ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
                         kitchenTimer?.cancel()
                         kitchenTimer = Timer()
                         val activity = requireActivity() as GameActivity
@@ -95,9 +96,9 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
                 }
                 else {
                     AlertDialog.Builder(activity)
-                        .setTitle("Хотите купить продукт?")
-                        .setNegativeButton("Нет") {dialog, which ->}
-                        .setPositiveButton("Да") {dialog, which ->
+                        .setTitle(getString(R.string.buy))
+                        .setNegativeButton(getString(R.string.no)) {dialog, which ->}
+                        .setPositiveButton(getString(R.string.yes)) {dialog, which ->
                             val points = sharedPreferences?.getInt("care_points", Constants.START_CARE_POINTS)
 
                             if (points!! >= product.carePoints) {
@@ -105,12 +106,14 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
                                     putInt("care_points", points - product.carePoints)
                                     putString("${product.id} product", replaceProductOpen(product.id))
                                 }
+                                activity?.findViewById<TextView>(R.id.tv_care_points_value)!!.text = "${getString(R.string.care_points)} ${points!! - product.carePoints}"
+                                Log.e("deif", "${points!! - product.carePoints}")
                                 findNavController().navigate(R.id.action_kitchenFragment_self)
                             }
                             else {
                                 AlertDialog.Builder(activity)
-                                    .setTitle("У вас недостаточно очков заботы.")
-                                    .setPositiveButton("Ок") {dialog, which ->}
+                                    .setTitle(getString(R.string.title2))
+                                    .setPositiveButton(R.string.ok) {dialog, which ->}
                                     .show()
                             }
                         }
@@ -150,7 +153,5 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
                 activity.sharedPreferences?.let { Cat.setBusy(false, cat, it) }
             })
         }
-
     }
-    
 }

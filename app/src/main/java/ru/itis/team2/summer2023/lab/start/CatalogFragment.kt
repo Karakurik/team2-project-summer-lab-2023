@@ -2,7 +2,6 @@ package ru.itis.team2.summer2023.lab.start
 
 import android.app.AlertDialog
 import android.content.Context
-
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -29,8 +28,8 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
 
         sharedPreferences = this.activity?.getSharedPreferences("", Context.MODE_PRIVATE)
 
-        binding!!.tvCarePoints.text = "Очки заботы: ${sharedPreferences?.getInt("care_points", 0)}"
-        binding!!.tvStatistic.text = "Число доступных котов: ${sharedPreferences?.getInt("number_of_cats", 1)}"
+        binding!!.tvCarePoints.text = "${getString(R.string.care_points)} ${sharedPreferences?.getInt("care_points", 0)}"
+        binding!!.tvStatistic.text = "${getString(R.string.number_of_cats)} ${sharedPreferences?.getInt("number_of_cats", 1)}"
         initAdapter()
     }
 
@@ -48,9 +47,9 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
             }
             else {
                 AlertDialog.Builder(activity)
-                    .setTitle("Хотите забрать кота к себе?")
-                    .setNegativeButton("Нет") { dialog, which -> }
-                    .setPositiveButton("Да") { dialog, which ->
+                    .setTitle(getString(R.string.title1))
+                    .setNegativeButton(getString(R.string.no)) { dialog, which -> }
+                    .setPositiveButton(R.string.yes) { dialog, which ->
 
                         val points = sharedPreferences?.getInt("care_points", 0)
                         val number = sharedPreferences?.getInt("number_of_cats", 1)
@@ -62,16 +61,17 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
                                 putString("${cat.id} cat", replaceCatOpen(cat.id))
                                 putInt("number_of_cats", number!! + 1)
                             }
-                            binding!!.tvCarePoints.text = "Очки заботы: ${sharedPreferences?.getInt("care_points", 0)}"
-                            binding!!.tvStatistic.text = "Число доступных котов: ${sharedPreferences?.getInt("number_of_cats", 1)}"
+                            binding!!.tvCarePoints.text = "${getString(R.string.care_points)} ${sharedPreferences?.getInt("care_points", 0)}"
+                            binding!!.tvStatistic.text = "${getString(R.string.number_of_cats)} ${sharedPreferences?.getInt("number_of_cats", 1)}"
+
                             findNavController().navigate(R.id.action_catalogFragment_self)
                             val intent = Intent(requireContext(), GameActivity::class.java)
                             startActivity(intent)
                         }
                         else {
                             AlertDialog.Builder(activity)
-                                .setTitle("У вас недостаточно очков заботы.")
-                                .setPositiveButton("Ок") {dialog, which ->}
+                                .setTitle(getString(R.string.title2))
+                                .setPositiveButton(getString(R.string.ok)) {dialog, which ->}
                                 .show()
                         }
                     }

@@ -1,6 +1,7 @@
 package ru.itis.team2.summer2023.lab.start
 
 import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.graphics.Color.parseColor
 import android.os.Bundle
 import android.view.View
@@ -20,20 +21,20 @@ import ru.itis.team2.summer2023.lab.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private var binding: FragmentSettingsBinding? = null
-    private val on: String = "включить звук"
-    private val off: String = "выключить звук"
+    private var sharedPreferences: SharedPreferences? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSettingsBinding.bind(view)
 
-        val sp = activity?.getSharedPreferences("", MODE_PRIVATE)
+        sharedPreferences = activity?.getSharedPreferences("", MODE_PRIVATE)
 
         checkText()
         binding?.run{
-            sp?.getInt(BACKGROUND_COLOR, 0)?.let { color.setBackgroundColor(it) }
-            sbRed.progress = sp?.getInt(COLOR_RED, 0)!!
-            sbGreen.progress = sp?.getInt(COLOR_GREEN, 0)!!
-            sbBlue.progress = sp?.getInt(COLOR_BLUE, 0)!!
+            sharedPreferences?.getInt(BACKGROUND_COLOR, 0)?.let { color.setBackgroundColor(it) }
+            sbRed.progress = sharedPreferences?.getInt(COLOR_RED, 0)!!
+            sbGreen.progress = sharedPreferences?.getInt(COLOR_GREEN, 0)!!
+            sbBlue.progress = sharedPreferences?.getInt(COLOR_BLUE, 0)!!
 
             btnSound.setOnClickListener{
                 activity?.let {
@@ -49,7 +50,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
                 override fun onStartTrackingTouch(seekBar: SeekBar) {}
                 override fun onStopTrackingTouch(seekBar: SeekBar) {
-                    sp?.edit {
+                    sharedPreferences?.edit {
                         putInt(COLOR_RED, sbRed.progress)
                     }
                 }
@@ -62,7 +63,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
                 override fun onStartTrackingTouch(seekBar: SeekBar) {}
                 override fun onStopTrackingTouch(seekBar: SeekBar) {
-                    sp?.edit {
+                    sharedPreferences?.edit {
                         putInt(COLOR_GREEN, sbGreen.progress)
                     }
                 }
@@ -75,7 +76,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
                 override fun onStartTrackingTouch(seekBar: SeekBar) {}
                 override fun onStopTrackingTouch(seekBar: SeekBar) {
-                    sp?.edit {
+                    sharedPreferences?.edit {
                         putInt(COLOR_BLUE, sbBlue.progress)
                     }
                 }
@@ -85,15 +86,15 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     fun checkText(){
         binding?.run {
-            if (activity?.getSharedPreferences("", MODE_PRIVATE)?.getBoolean(MUSIC, SOUND) == true) {
-                btnSound.text = off
-            } else btnSound.text = on
+            if (sharedPreferences?.getBoolean(MUSIC, SOUND) == true) {
+                btnSound.text = getString(R.string.off)
+            } else btnSound.text = getString(R.string.on)
         }
     }
 
     fun setColor(red:Int, green:Int, blue:Int){
         val back_color = parseColor(toHexColor(red, green, blue))
-        activity?.getSharedPreferences("", MODE_PRIVATE)?.edit {
+        sharedPreferences?.edit {
             putInt(BACKGROUND_COLOR, back_color)
         }
         binding?.color?.setBackgroundColor(back_color)

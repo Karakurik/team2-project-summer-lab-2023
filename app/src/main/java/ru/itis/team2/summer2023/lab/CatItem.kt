@@ -14,7 +14,7 @@ class CatItem(
 
     fun onBind(cat: Cat) {
         binding.run {
-            tvBreed.text = "Порода: ${binding.root.context.getString(cat.breed)}"
+            tvBreed.text = "${binding.root.context.getString(R.string.breed_info_title)}: ${binding.root.context.getString(cat.breed)}"
 
             if (cat.open) {
                 glide.load(cat.catalogImage)
@@ -22,7 +22,7 @@ class CatItem(
                 tvCarePoints.visibility = GONE
             }
             else {
-                tvCarePoints.text = "Очки заботы: ${cat.carePoints}"
+                tvCarePoints.text = "${binding.root.context.getString(R.string.care_points)} ${cat.carePoints}"
             }
 
             root.setOnClickListener {
