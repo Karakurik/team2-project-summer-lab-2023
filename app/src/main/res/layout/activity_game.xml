@@ -47,90 +47,88 @@
         android:layout_width="0dp"
         android:layout_height="300dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_goneMarginTop="16dp"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
-        app:layout_constraintTop_toTopOf="@id/btn_to_start" />
+        app:layout_constraintTop_toBottomOf="@id/pb_happy" />
     <ImageView
         android:id="@+id/iv_cat_sad"
         android:layout_width="0dp"
         android:layout_height="300dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/pb_happy" />
     <ImageView
         android:id="@+id/iv_cat_meow"
         android:layout_width="0dp"
         android:layout_height="300dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/pb_happy"/>
     <ImageView
         android:id="@+id/iv_cat_eat"
         android:layout_width="0dp"
         android:layout_height="300dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/pb_happy"/>
     <ImageView
         android:id="@+id/iv_cat_to_sleep"
         android:layout_width="0dp"
         android:layout_height="300dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/pb_happy"/>
     <ImageView
         android:id="@+id/iv_cat_from_sleep"
         android:layout_width="0dp"
         android:layout_height="300dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/pb_happy"/>
     <ImageView
         android:id="@+id/iv_cat_sleeping"
         android:layout_width="0dp"
         android:layout_height="300dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/pb_happy"/>
     <ImageView
         android:id="@+id/iv_cat_wash"
         android:layout_width="0dp"
         android:layout_height="300dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@id/pb_happy"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/bnv"
@@ -141,7 +139,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="12dp"
         android:layout_marginHorizontal="12dp"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="0dp"
         android:elevation="50dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
