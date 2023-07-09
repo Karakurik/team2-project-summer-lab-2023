@@ -4,15 +4,13 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import ru.itis.team2.summer2023.lab.Cat
 import ru.itis.team2.summer2023.lab.Constants
 import ru.itis.team2.summer2023.lab.R
@@ -26,7 +24,7 @@ import ru.itis.team2.summer2023.lab.Constants.Companion.BACKGROUND_COLOR
 class GameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGameBinding
     var sharedPreferences: SharedPreferences? = null
-    var animations: HashMap<Int,AnimationDrawable> = HashMap()
+    var animations: HashMap<Int, AnimationDrawable> = HashMap()
     private var catUpdateTimer: Timer? = null
     private var catUpdateTask: CatUpdateTask? = null
     private var pbUpdateTimer: Timer? = null
@@ -53,9 +51,8 @@ class GameActivity : AppCompatActivity() {
         }
         initAnimations(cat)
         binding.tvCarePointsValue.text = "Очки заботы: ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
-        if (!cat.isBusy){
-            cat = setDefaultAnimation(cat)
-        }
+        cat = Cat.setBusy(false, cat, sharedPreferences!!)
+        cat = setDefaultAnimation(cat)
 
         catUpdateTimer?.cancel()
         catUpdateTimer = Timer()
