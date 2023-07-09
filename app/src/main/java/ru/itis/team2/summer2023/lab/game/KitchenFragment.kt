@@ -24,7 +24,7 @@ import ru.itis.team2.summer2023.lab.game.RecycleView.ProductItem
 class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
     private var binding: FragmentKitchenBinding? = null
     private var adapter: ProductAdapter? = null
-    private val advice: String = "kitchen advice"
+    private val advice: Int = R.string.kitchen_advice
     private var sharedPreferences: SharedPreferences? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

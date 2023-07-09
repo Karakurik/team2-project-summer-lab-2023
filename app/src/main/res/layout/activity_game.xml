@@ -49,10 +49,10 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="50dp"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintBottom_toTopOf="@id/game_container"
+        app:layout_goneMarginTop="16dp"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/btn_to_start" />
     <ImageView
         android:id="@+id/iv_cat_sad"
         android:layout_width="0dp"
