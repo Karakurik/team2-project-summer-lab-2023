@@ -15,4 +15,9 @@
     <string name="breed2_info">голубая русская одна из лучших пород мира</string>
     <string name="breed3_info">шотландская просто милашечка тоже одна из лучших пород мира</string>
     <string name="advice">совет</string>
+    <string name="red">RED</string>
+    <string name="green">GREEN</string>
+    <string name="blue">BLUE</string>
+    <string name="choose_color">Выбери цвет фона</string>
+
 </resources>

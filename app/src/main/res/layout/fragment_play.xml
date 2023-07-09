@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".game.PlayFragment">
+    app:layoutDescription="@xml/fragment_play_scene"
+    android:id="@+id/motion">
 
-    <ImageButton
-        android:id="@+id/btn_advice"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:backgroundTint="#00FFFFFF"
-        android:src="@drawable/question"
-        app:layout_constraintBottom_toBottomOf="@id/rv_play"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/rv_play"
-        app:layout_constraintTop_toTopOf="@id/rv_play" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_play"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        app:layoutManager="LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_advice"
+    <ImageView
+        android:id="@+id/iv_mouse"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/mouse"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/rv_item" />
+        app:layout_constraintTop_toTopOf="@id/tv_score"
+        tools:ignore="ContentDescription" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Пойманных мышей:"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="8dp"/>
+</androidx.constraintlayout.motion.widget.MotionLayout>

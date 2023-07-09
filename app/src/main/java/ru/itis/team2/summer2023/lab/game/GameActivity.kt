@@ -4,7 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.drawable.AnimationDrawable
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
@@ -20,6 +20,7 @@ import ru.itis.team2.summer2023.lab.databinding.ActivityGameBinding
 import ru.itis.team2.summer2023.lab.start.StartActivity
 import java.util.Timer
 import java.util.TimerTask
+import ru.itis.team2.summer2023.lab.Constants.Companion.BACKGROUND_COLOR
 
 
 class GameActivity : AppCompatActivity() {
@@ -30,12 +31,20 @@ class GameActivity : AppCompatActivity() {
     private var catUpdateTask: CatUpdateTask? = null
     private var pbUpdateTimer: Timer? = null
     private var pbUpdateTask: PBUpdateTask? = null
+    var mp: MediaPlayer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         sharedPreferences = this.getSharedPreferences("", Context.MODE_PRIVATE)
+
+        mp = MediaPlayer.create(this, R.raw.music_game)
+        mp?.setLooping(true)
+
+        sharedPreferences?.getInt(BACKGROUND_COLOR, 0)
+            ?.let { binding.clGame.setBackgroundColor(it) }
 
         val id = sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
         var cat = Cat.getCat(id, sharedPreferences!!)
@@ -84,9 +93,6 @@ class GameActivity : AppCompatActivity() {
             dialog?.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
             dialog?.show()
         }
-//        GlobalScope.launch {
-//            lowCatStats()
-//        }
     }
     class PBUpdateTask(private val activity: GameActivity): TimerTask(){
         override fun run() {
@@ -170,6 +176,24 @@ class GameActivity : AppCompatActivity() {
     fun getTotalScore(cat: Cat): Int{
         return ((cat.hunger+cat.happy+cat.purity+cat.sleep)*100/400)
     }
+
+    override fun onResume(){
+        super.onResume()
+        val sharedPreferences = getSharedPreferences("", MODE_PRIVATE)
+        if (sharedPreferences.getBoolean(Constants.MUSIC, Constants.SOUND)) mp?.start()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mp?.stop()
+        mp?.release()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mp?.pause()
+    }
+
     fun initAnimations(cat: Cat){
         binding.ivCatIdle.setBackgroundResource(cat.animations.idle)
         binding.ivCatSad.setBackgroundResource(cat.animations.sad)
@@ -189,42 +213,4 @@ class GameActivity : AppCompatActivity() {
         animations[cat.animations.fromSleep] = binding.ivCatFromSleep.background as AnimationDrawable
         animations.forEach{(_: Int, animation: AnimationDrawable) -> animation.alpha = 0}
     }
-
-//
-//    suspend fun lowCatStats() = coroutineScope{
-//        launch {
-//            while (true){
-//                var cat = Cat.getCat(sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF), sharedPreferences!!)
-//
-//                delay(Constants.CAT_UPDATE_VALUES)
-//
-//                if (!cat.isBusy){
-//                    if (cat.hunger - Constants.LOW_FACTOR > 0){
-//                        Cat.setHunger(cat.hunger - Constants.LOW_FACTOR, cat, sharedPreferences!!)
-//                    } else Cat.setHunger(0, cat, sharedPreferences!!)
-//                    if (cat.sleep - Constants.LOW_FACTOR> 0){
-//                        Cat.setSleep(cat.sleep - Constants.LOW_FACTOR, cat, sharedPreferences!!)
-//                    } else Cat.setSleep(0, cat, sharedPreferences!!)
-//                    if (cat.happy - Constants.LOW_FACTOR> 0){
-//                        Cat.setHappy(cat.happy - Constants.LOW_FACTOR, cat, sharedPreferences!!)
-//                    } else Cat.setHappy(0, cat, sharedPreferences!!)
-//                    if (cat.purity - Constants.LOW_FACTOR> 0){
-//                        Cat.setPurity(cat.purity - Constants.LOW_FACTOR, cat, sharedPreferences!!)
-//                    } else Cat.setPurity(0, cat, sharedPreferences!!)
-//                }
-//            }
-//        }
-//        launch{
-//            while (true) {
-//                val cat = Cat.getCat(
-//                    sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF),
-//                    sharedPreferences!!
-//                )
-//                binding.pbHappy.progress = cat.happy
-//                binding.pbHunger.progress = cat.hunger
-//                binding.pbPurity.progress = cat.purity
-//                binding.pbSleep.progress = cat.sleep
-//            }
-//        }
-//    }
 }
