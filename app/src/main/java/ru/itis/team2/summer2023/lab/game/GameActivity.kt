@@ -4,35 +4,29 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.drawable.AnimationDrawable
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.edit
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.gson.Gson
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import ru.itis.team2.summer2023.lab.Cat
-import ru.itis.team2.summer2023.lab.CatRepository
 import ru.itis.team2.summer2023.lab.Constants
 import ru.itis.team2.summer2023.lab.R
 import ru.itis.team2.summer2023.lab.databinding.ActivityGameBinding
 import ru.itis.team2.summer2023.lab.start.StartActivity
-import kotlin.coroutines.CoroutineContext
+import ru.itis.team2.summer2023.lab.Constants.Companion.BACKGROUND_COLOR
 
 
 class GameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGameBinding
     var sharedPreferences: SharedPreferences? = null
+    var mp: MediaPlayer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
@@ -40,12 +34,18 @@ class GameActivity : AppCompatActivity() {
 
         sharedPreferences = this.getSharedPreferences("", Context.MODE_PRIVATE)
 
+        mp = MediaPlayer.create(this, R.raw.music_game)
+        mp?.setLooping(true)
+
+        sharedPreferences?.getInt(BACKGROUND_COLOR, 0)
+            ?.let { binding.clGame.setBackgroundColor(it) }
+
         val id = sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
         val cat = Cat.getCat(id, sharedPreferences!!)
         if (cat.age == 0L) {
             Cat.setAge(System.currentTimeMillis(), cat, sharedPreferences!!)
         }
-        initAnimations(cat)
+            //initAnimations(cat)
 
         val fragment =
             supportFragmentManager.findFragmentById(R.id.game_container) as? NavHostFragment
@@ -77,6 +77,24 @@ class GameActivity : AppCompatActivity() {
             lowCatStats()
         }
     }
+
+    override fun onResume(){
+        super.onResume()
+        val sharedPreferences = getSharedPreferences("", MODE_PRIVATE)
+        if (sharedPreferences.getBoolean(Constants.MUSIC, Constants.SOUND)) mp?.start()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mp?.stop()
+        mp?.release()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mp?.pause()
+    }
+
     fun initAnimations(cat: Cat){
         binding.ivCatIdle.setBackgroundResource(cat.animations.idle)
         binding.ivCatSad.setBackgroundResource(cat.animations.sad)
