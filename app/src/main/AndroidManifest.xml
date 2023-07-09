@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Team2projectsummerlab2023"
+        android:largeHeap="true"
         tools:targetApi="31">
         <service
             android:name=".MusicService"
