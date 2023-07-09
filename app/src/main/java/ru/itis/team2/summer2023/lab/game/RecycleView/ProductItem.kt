@@ -1,6 +1,6 @@
 package ru.itis.team2.summer2023.lab.game.RecycleView
 
-import android.view.View.GONE
+import android.view.View.INVISIBLE
 import androidx.recyclerview.widget.RecyclerView
 import ru.itis.team2.summer2023.lab.databinding.RvItemBinding
 
@@ -16,7 +16,7 @@ class ProductItem (
 
                 if (product.open) {
                     ivImage.setImageResource(product.picture)
-                    tvCarePoints.visibility = GONE
+                    tvCarePoints.visibility = INVISIBLE
                 }
                 else {
                     tvCarePoints.text = "ОЗ: ${product.carePoints}"

@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import ru.itis.team2.summer2023.lab.Cat
-import ru.itis.team2.summer2023.lab.CatRepository
 import ru.itis.team2.summer2023.lab.Constants
 import ru.itis.team2.summer2023.lab.R
 import ru.itis.team2.summer2023.lab.databinding.FragmentInfoBinding
