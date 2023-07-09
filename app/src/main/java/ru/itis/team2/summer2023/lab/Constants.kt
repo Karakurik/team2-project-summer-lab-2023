@@ -7,5 +7,11 @@ class Constants {
         val START_CAT_AMOUNT:Int = 1
         val LOW_FACTOR: Int = 5
         val WAIT: Long = 30000L
+        val SOUND: Boolean = true
+        val MUSIC: String = "MUSIC"
+        val BACKGROUND_COLOR: String = "COLOR"
+        val COLOR_RED: String = "COLOR_RED"
+        val COLOR_GREEN: String = "COLOR_GREEN"
+        val COLOR_BLUE: String = "COLOR_BLUE"
     }
 }
