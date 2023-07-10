@@ -1,6 +1,7 @@
 package ru.itis.team2.summer2023.lab.game
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
@@ -21,12 +22,13 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
     private var binding: FragmentPlayBinding? = null
     private var meowTimer: Timer? = null
     private var meowTimerTask: MeowTimerTask? = null
+    private var sharedPreferences: SharedPreferences? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPlayBinding.bind(view)
 
-        var sharedPreferences = this.activity?.getSharedPreferences("", Context.MODE_PRIVATE)
+        sharedPreferences = this.activity?.getSharedPreferences("", Context.MODE_PRIVATE)
 
         val music: MediaPlayer = MediaPlayer.create(this.context, R.raw.cat)
 
@@ -38,18 +40,18 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
             ivMouse.setOnClickListener {
                 val id = sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
                 var cat = Cat.getCat(id)
-                if (!sharedPreferences.getBoolean("LIGHT", true)){
+                if (!sharedPreferences!!.getBoolean("LIGHT", true)){
                     binding?.let { Snackbar.make(it.root, "дайте вашему котику отдохнуть", Snackbar.LENGTH_SHORT).show() }
                 }
                 if (!cat.isBusy) {
                     cat = Cat.setBusy(true,id)
 
-                    if (sharedPreferences.getBoolean(MUSIC, SOUND)) music.start()
+                    if (sharedPreferences!!.getBoolean(MUSIC, SOUND)) music.start()
                     score++
                     tvScore.text = getString(R.string.mouse) + " $score"
                     if (score % Constants.MOUSES == 0) {
-                        val carePoints = sharedPreferences.getInt("care_points", Constants.START_CARE_POINTS)
-                        sharedPreferences.edit {
+                        val carePoints = sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)
+                        sharedPreferences!!.edit {
                             putInt("care_points", carePoints + Constants.STANDART_INCREASE_CARE_POINTS)
                         }
                         requireActivity().findViewById<TextView>(R.id.tv_care_points_value).text =
@@ -90,6 +92,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Cat.updateSharedPrefs(sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF), sharedPreferences!!)
         binding = null
     }
 }

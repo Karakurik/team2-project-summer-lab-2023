@@ -157,7 +157,7 @@ class SleepFragment : Fragment(R.layout.fragment_sleep) {
                 sleepTimer?.cancel()
                 sleepTimer = Timer()
                 sleepTimerTask = SleepTimerTask(activity, cat, sleepFragment)
-                sleepTimer!!.schedule(sleepTimerTask, Constants.CAT_UPDATE_VALUES/4, Constants.CAT_UPDATE_VALUES/4)
+                sleepTimer!!.schedule(sleepTimerTask, 0, Constants.CAT_UPDATE_VALUES/4)
             })
         }
         class SleepTimerTask(
@@ -168,10 +168,10 @@ class SleepFragment : Fragment(R.layout.fragment_sleep) {
             override fun run() {
                 activity.runOnUiThread {
                     cat = Cat.getCat(cat.id)
-                    if (!sleepFragment.light){
-                        cat = if (cat.hunger - Constants.LOW_FACTOR > 0) {
+                    if (!sleepFragment.sharedPreferences!!.getBoolean("LIGHT", true)){
+                        cat = if (cat.hunger - Constants.LOW_FACTOR/2 > 0) {
                             Cat.setHunger(
-                                cat.hunger - Constants.LOW_FACTOR,
+                                cat.hunger - Constants.LOW_FACTOR/2,
                                 cat.id
                             )
                         } else Cat.setHunger(0, cat.id)
@@ -179,9 +179,9 @@ class SleepFragment : Fragment(R.layout.fragment_sleep) {
                             cat.sleep + Constants.STANDART_INCREASE_CAT_VALUES,
                             cat.id
                         )
-                        cat = if (cat.purity - Constants.LOW_FACTOR > 0) {
+                        cat = if (cat.purity - Constants.LOW_FACTOR/2 > 0) {
                             Cat.setPurity(
-                                cat.purity - Constants.LOW_FACTOR,
+                                cat.purity - Constants.LOW_FACTOR/2,
                                 cat.id
                             )
                         } else Cat.setPurity(0, cat.id)
@@ -193,6 +193,7 @@ class SleepFragment : Fragment(R.layout.fragment_sleep) {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Cat.updateSharedPrefs(sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF), sharedPreferences!!)
         binding = null
     }
 }

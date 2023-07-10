@@ -81,6 +81,7 @@ class BathFragment : Fragment(R.layout.fragment_bath) {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Cat.updateSharedPrefs(sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF), sharedPreferences!!)
         binding = null
     }
     class BathTimerTask(private val activity: GameActivity, var cat: Cat): TimerTask(){

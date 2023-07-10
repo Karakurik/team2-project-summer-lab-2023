@@ -46,16 +46,21 @@ class GameActivity : AppCompatActivity() {
 
         val id = sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
 
-        Cat.updateRepo(id, sharedPreferences!!)
+        var cat = Cat.updateRepo(id, sharedPreferences!!)
 
-        var cat = Cat.getCat(id)
         if (cat.age == 0L) {
             cat = Cat.setAge(System.currentTimeMillis(), id)
         }
         initAnimations(cat)
         binding.tvCarePointsValue.text = "Очки заботы: ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
-        cat = Cat.setBusy(false, id)
-        cat = setDefaultAnimation(cat)
+        if (sharedPreferences!!.getBoolean("LIGHT", true)){
+            cat = Cat.setBusy(false, id)
+            cat = setDefaultAnimation(cat)
+        } else {
+            Cat.setCurrentAnimation(cat.animations.sleep, id)
+            animations[cat.currentAnimation]?.alpha = 255
+            animations[cat.currentAnimation]?.start()
+        }
 
         catUpdateTimer?.cancel()
         catUpdateTimer = Timer()
