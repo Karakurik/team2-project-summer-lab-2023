@@ -16,7 +16,7 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
         binding = FragmentInfoBinding.bind(view)
 
         val sharedPreferences = this.requireActivity().getSharedPreferences("", Context.MODE_PRIVATE);
-        val cat = Cat.getCat(sharedPreferences.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF), sharedPreferences)
+        val cat = Cat.getCat(sharedPreferences.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF))
         binding?.run {
             tvAgeValue.text = ((System.currentTimeMillis() - cat.age)/ 1000L).toString()
         }

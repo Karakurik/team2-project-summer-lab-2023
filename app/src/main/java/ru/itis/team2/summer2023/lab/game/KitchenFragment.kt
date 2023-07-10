@@ -12,6 +12,7 @@ import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import ru.itis.team2.summer2023.lab.Cat
 import ru.itis.team2.summer2023.lab.Constants
@@ -59,10 +60,9 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
             onItemClick = {product ->
                 if (product.open) {
                     val id = sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
-                    var cat = Cat.getCat(id, sharedPreferences!!)
+                    var cat = Cat.getCat(id)
                     if (!cat.isBusy) {
-                        cat = Cat.setBusy(true,cat,sharedPreferences!!)
-                        cat = Cat.setHunger(cat.hunger + product.restoring, cat, sharedPreferences!!)
+                        cat = Cat.setBusy(true,id)
                         if (cat.hunger < 100) {
                             sharedPreferences?.edit {
                                 putInt(
@@ -70,16 +70,16 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
                                     sharedPreferences!!.getInt(
                                         "care_points",
                                         Constants.START_CARE_POINTS
-                                    ) + product.carePoints
+                                    ) + Constants.STANDART_INCREASE_CARE_POINTS
                                 )
                             }
                         }
+                        cat = Cat.setHunger(cat.hunger + product.restoring, id)
                         requireActivity().findViewById<TextView>(R.id.tv_care_points_value).text =
                             "${getString(R.string.care_points)} ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
                         kitchenTimer?.cancel()
                         kitchenTimer = Timer()
                         val activity = requireActivity() as GameActivity
-                        kitchenTimerTask = KitchenTimerTask(activity, cat)
                         val num = activity.animations[cat.animations.eat]?.numberOfFrames
                         var sum = 0
                         for (i in 0 until num!!){
@@ -91,7 +91,11 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
                         activity.animations[cat.animations.eat]?.alpha = 255
                         activity.animations[cat.currentAnimation]?.alpha = 0
                         activity.animations[cat.animations.eat]?.start()
+                        cat = Cat.setCurrentAnimation(cat.animations.eat, id)
+                        kitchenTimerTask = KitchenTimerTask(activity, cat)
                         kitchenTimer!!.schedule(kitchenTimerTask, sum.toLong())
+                    } else {
+                        binding?.let { Snackbar.make(it.root, "ваш котик уже занят прямо сейчас", Snackbar.LENGTH_SHORT).show() }
                     }
                 }
                 else {
@@ -106,8 +110,9 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
                                     putInt("care_points", points - product.carePoints)
                                     putString("${product.id} product", replaceProductOpen(product.id))
                                 }
-                                activity?.findViewById<TextView>(R.id.tv_care_points_value)!!.text = "${getString(R.string.care_points)} ${points!! - product.carePoints}"
-                                Log.e("deif", "${points!! - product.carePoints}")
+                                requireActivity().findViewById<TextView>(R.id.tv_care_points_value).text =
+                                     "${getString(R.string.care_points)} ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
+                              
                                 findNavController().navigate(R.id.action_kitchenFragment_self)
                             }
                             else {
@@ -150,7 +155,7 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
                 activity.animations[cat.animations.eat]?.alpha = 0
                 activity.animations[cat.animations.eat]?.stop()
                 cat = activity.setDefaultAnimation(cat)
-                activity.sharedPreferences?.let { Cat.setBusy(false, cat, it) }
+                activity.sharedPreferences?.let { Cat.setBusy(false, cat.id) }
             })
         }
     }

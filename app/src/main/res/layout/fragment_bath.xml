@@ -15,6 +15,17 @@
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintDimensionRatio="1:1"
        app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toEndOf="@id/btn_wash"
+       app:layout_constraintTop_toTopOf="parent" />
+
+   <ImageButton
+       android:id="@+id/btn_wash"
+       android:layout_width="64dp"
+       android:layout_height="64dp"
+       android:backgroundTint="#00FFFFFF"
+       android:src="@drawable/drop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toStartOf="@+id/btn_advice"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toTopOf="parent" />
 
