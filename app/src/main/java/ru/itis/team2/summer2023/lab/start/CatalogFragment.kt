@@ -15,6 +15,7 @@ import ru.itis.team2.summer2023.lab.Cat
 import ru.itis.team2.summer2023.lab.CatAdapter
 import ru.itis.team2.summer2023.lab.CatAnimation
 import ru.itis.team2.summer2023.lab.CatRepository
+import ru.itis.team2.summer2023.lab.Constants
 import ru.itis.team2.summer2023.lab.R
 import ru.itis.team2.summer2023.lab.databinding.FragmentCatalogBinding
 import ru.itis.team2.summer2023.lab.game.GameActivity
@@ -28,6 +29,9 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
         binding = FragmentCatalogBinding.bind(view)
 
         sharedPreferences = this.activity?.getSharedPreferences("", Context.MODE_PRIVATE)
+
+        sharedPreferences?.getInt(Constants.BACKGROUND_COLOR, 0)
+            ?.let { binding?.catalogFragment?.setBackgroundColor(it) }
 
         binding!!.tvCarePoints.text = "${getString(R.string.care_points)} ${sharedPreferences?.getInt("care_points", 0)}"
         binding!!.tvStatistic.text = "${getString(R.string.number_of_cats)} ${sharedPreferences?.getInt("number_of_cats", 1)}"

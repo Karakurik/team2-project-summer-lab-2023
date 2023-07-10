@@ -30,6 +30,8 @@ class StartActivity : AppCompatActivity() {
         mp = MediaPlayer.create(this, R.raw.music_start)
         mp?.setLooping(true)
 
+
+
         // val controller = (supportFragmentManager.findFragmentById(R.id.start_container) as NavHostFragment).navController
 
         //getSharedPreferences("", MODE_PRIVATE).edit().clear().apply(); // это временно чтобы удалять предыдущие записанные значения потом уберем
@@ -84,7 +86,7 @@ class StartActivity : AppCompatActivity() {
                 putInt("care_points", Constants.START_CARE_POINTS)
                 putInt("number_of_cats", Constants.START_CAT_AMOUNT)
                 putBoolean(MUSIC, SOUND)
-                putInt(BACKGROUND_COLOR, WHITE)
+                putInt(BACKGROUND_COLOR, getColor(R.color.white))
             }
 
             index = 1
