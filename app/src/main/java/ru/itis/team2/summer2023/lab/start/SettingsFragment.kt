@@ -1,7 +1,9 @@
 package ru.itis.team2.summer2023.lab.start
 
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.graphics.Color.parseColor
 import android.os.Bundle
 import android.view.View
@@ -17,6 +19,7 @@ import ru.itis.team2.summer2023.lab.Constants.Companion.MUSIC
 import ru.itis.team2.summer2023.lab.Constants.Companion.SOUND
 import ru.itis.team2.summer2023.lab.R
 import ru.itis.team2.summer2023.lab.databinding.FragmentSettingsBinding
+import java.util.Locale
 
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
@@ -30,17 +33,24 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         sharedPreferences = activity?.getSharedPreferences("", MODE_PRIVATE)
 
         checkText()
+
         binding?.run{
-            sharedPreferences?.getInt(BACKGROUND_COLOR, 0)?.let { color.setBackgroundColor(it) }
-            sbRed.progress = sharedPreferences?.getInt(COLOR_RED, 0)!!
-            sbGreen.progress = sharedPreferences?.getInt(COLOR_GREEN, 0)!!
-            sbBlue.progress = sharedPreferences?.getInt(COLOR_BLUE, 0)!!
+            sharedPreferences?.getInt(BACKGROUND_COLOR, 0)?.let {
+                color.setBackgroundColor(it)
+            }
+            sbRed.progress = sharedPreferences?.getInt(COLOR_RED, 255)!!
+            sbGreen.progress = sharedPreferences?.getInt(COLOR_GREEN, 255)!!
+            sbBlue.progress = sharedPreferences?.getInt(COLOR_BLUE, 255)!!
 
             btnSound.setOnClickListener{
                 activity?.let {
                     (it as StartActivity).musicChange()
                 }
                 checkText()
+            }
+
+            btnLanguage.setOnClickListener{
+
             }
 
             sbRed.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
