@@ -50,6 +50,7 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Cat.updateSharedPrefs(sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF), sharedPreferences!!)
         binding = null
     }
 
