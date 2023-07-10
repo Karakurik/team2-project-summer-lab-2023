@@ -118,4 +118,5 @@ Alarm signal – the cat hides under the sofa, in the closet or somewhere else i
     <string name="catjelly">catjelly</string>
     <string name="surprise">surprise</string>
     <string name="busy">your cat is already busy right now</string>
+    <string name="learning_text">blabla</string>
 </resources>
