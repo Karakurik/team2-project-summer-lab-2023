@@ -49,9 +49,6 @@ class GameActivity : AppCompatActivity() {
 
         var cat = Cat.updateRepo(id, sharedPreferences!!)
 
-        if (cat.age == 0L) {
-            cat = Cat.setAge(System.currentTimeMillis(), id)
-        }
         initAnimations(cat)
         binding.tvCarePointsValue.text = "Очки заботы: ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
         if (sharedPreferences!!.getBoolean("LIGHT_$id", true)){
