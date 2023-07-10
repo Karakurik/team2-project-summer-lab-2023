@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import ru.itis.team2.summer2023.lab.Cat
 import ru.itis.team2.summer2023.lab.CatAdapter
+import ru.itis.team2.summer2023.lab.CatAnimation
 import ru.itis.team2.summer2023.lab.CatRepository
 import ru.itis.team2.summer2023.lab.R
 import ru.itis.team2.summer2023.lab.databinding.FragmentCatalogBinding
@@ -101,6 +102,7 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
             cat.hunger = newCat.hunger
             cat.purity = newCat.purity
             cat.sleep = newCat.sleep
+            cat.age = newCat.age
             index++
         }
     }

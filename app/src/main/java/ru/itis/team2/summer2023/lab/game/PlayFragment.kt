@@ -37,9 +37,9 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
             var score = 0
             ivMouse.setOnClickListener {
                 val id = sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
-                var cat = Cat.getCat(id, sharedPreferences)
+                var cat = Cat.getCat(id)
                 if (!cat.isBusy) {
-                    cat = Cat.setBusy(true,cat,sharedPreferences)
+                    cat = Cat.setBusy(true,id)
 
                     if (sharedPreferences.getBoolean(MUSIC, SOUND)) music.start()
                     score++
@@ -52,7 +52,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
                         requireActivity().findViewById<TextView>(R.id.tv_care_points_value).text =
                             "Очки заботы: ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
                     }
-                    cat = Cat.setHappy(cat.happy + Constants.STANDART_INCREASE_CAT_VALUES, cat, sharedPreferences)
+                    cat = Cat.setHappy(cat.happy + Constants.STANDART_INCREASE_CAT_VALUES, id)
                     meowTimer?.cancel()
                     meowTimer = Timer()
                     val activity = requireActivity() as GameActivity
@@ -67,7 +67,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
                     activity.animations[cat.animations.meow]?.alpha = 255
                     activity.animations[cat.currentAnimation]?.alpha = 0
                     activity.animations[cat.animations.meow]?.start()
-                    cat = Cat.setCurrentAnimation(cat.animations.meow, cat, sharedPreferences)
+                    cat = Cat.setCurrentAnimation(cat.animations.meow, id)
                     meowTimerTask = MeowTimerTask(activity, cat)
                     meowTimer!!.schedule(meowTimerTask, sum.toLong())
                 }
@@ -80,7 +80,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
                 activity.animations[cat.animations.meow]?.alpha = 0
                 activity.animations[cat.animations.meow]?.stop()
                 cat = activity.setDefaultAnimation(cat)
-                activity.sharedPreferences?.let { Cat.setBusy(false, cat, it) }
+                activity.sharedPreferences?.let { Cat.setBusy(false, cat.id) }
             })
         }
     }

@@ -8,7 +8,7 @@ data class Cat(
 
     val id: Int,
     val breed: Int,
-    var carePoints: Int,
+    val carePoints: Int,
     val catalogImage: Int,
     var currentAnimation: Int,
     val animations: CatAnimation,
@@ -22,83 +22,70 @@ data class Cat(
     var isBusy: Boolean
 ){
     companion object {
-        private fun findCat(id: Int): Cat? {
-            for (cat in CatRepository.list) {
-                if (cat.id == id) return cat
-            }
-            return null
+        fun getCat(id: Int): Cat {
+            return CatRepository.list.first { cat:Cat -> cat.id == id }
         }
-        fun getCat(id: Int, sharedPreferences: SharedPreferences): Cat{
+        fun updateRepo(id: Int, sharedPreferences: SharedPreferences): Cat {
             val string = sharedPreferences.getString("$id cat", "")
-            return Gson().fromJson(string, Cat::class.java)
+            val newCat =  Gson().fromJson(string, Cat::class.java)
+            val cat = getCat(id)
+            cat.open = newCat.open
+            cat.happy = newCat.happy
+            cat.hunger = newCat.hunger
+            cat.purity = newCat.purity
+            cat.sleep = newCat.sleep
+            cat.open = newCat.open
+            cat.age = newCat.age
+            return cat
         }
-        fun setHunger(value: Int, cat: Cat, sharedPreferences: SharedPreferences):Cat{
+        fun updateSharedPrefs(id: Int, sharedPreferences: SharedPreferences){
+            sharedPreferences.edit {
+                putString("$id cat", Gson().toJson(getCat(id)))
+            }
+        }
+        fun setHunger(value: Int, id: Int):Cat{
             val settingValue: Int = if (value > 100) 100 else value
+            val cat = getCat(id)
             cat.hunger = settingValue
-            findCat(cat.id)!!.hunger = settingValue
-            sharedPreferences.edit {
-                putString("${cat.id} cat", Gson().toJson(cat))
-            }
-            return getCat(cat.id, sharedPreferences)
+            return cat
         }
-        fun setCurrentAnimation(value: Int, cat: Cat, sharedPreferences: SharedPreferences):Cat{
+        fun setCurrentAnimation(value: Int, id: Int):Cat{
+            val cat = getCat(id)
             cat.currentAnimation = value
-            findCat(cat.id)!!.currentAnimation = value
-            sharedPreferences.edit {
-                putString("${cat.id} cat", Gson().toJson(cat))
-            }
-            return getCat(cat.id, sharedPreferences)
+            return cat
         }
-        fun setHappy(value: Int, cat: Cat, sharedPreferences: SharedPreferences):Cat{
+        fun setHappy(value: Int, id: Int):Cat{
             val settingValue: Int = if (value > 100) 100 else value
+            val cat = getCat(id)
             cat.happy = settingValue
-            findCat(cat.id)!!.happy = settingValue
-            sharedPreferences.edit {
-                putString("${cat.id} cat", Gson().toJson(cat))
-            }
-            return getCat(cat.id, sharedPreferences)
+            return cat
         }
-        fun setSleep(value: Int, cat: Cat, sharedPreferences: SharedPreferences):Cat{
+        fun setSleep(value: Int, id: Int):Cat{
             val settingValue: Int = if (value > 100) 100 else value
+            val cat = getCat(id)
             cat.sleep = settingValue
-            findCat(cat.id)!!.sleep = settingValue
-            sharedPreferences.edit {
-                putString("${cat.id} cat", Gson().toJson(cat))
-            }
-            return getCat(cat.id, sharedPreferences)
+            return cat
         }
-        fun setPurity(value: Int, cat: Cat, sharedPreferences: SharedPreferences):Cat{
+        fun setPurity(value: Int, id: Int):Cat{
             val settingValue: Int = if (value > 100) 100 else value
+            val cat = getCat(id)
             cat.purity = settingValue
-            findCat(cat.id)!!.purity = settingValue
-            sharedPreferences.edit {
-                putString("${cat.id} cat", Gson().toJson(cat))
-            }
-            return getCat(cat.id, sharedPreferences)
+            return cat
         }
-        fun setOpen(value: Boolean, cat: Cat, sharedPreferences: SharedPreferences):Cat{
+        fun setOpen(value: Boolean, id: Int):Cat{
+            val cat = getCat(id)
             cat.open = value
-            findCat(cat.id)!!.open = value
-            sharedPreferences.edit {
-                putString("${cat.id} cat", Gson().toJson(cat))
-            }
-            return getCat(cat.id, sharedPreferences)
+            return cat
         }
-        fun setBusy(value: Boolean, cat: Cat, sharedPreferences: SharedPreferences): Cat{
+        fun setBusy(value: Boolean, id: Int): Cat{
+            val cat = getCat(id)
             cat.isBusy = value
-            findCat(cat.id)!!.isBusy = value
-            sharedPreferences.edit {
-                putString("${cat.id} cat", Gson().toJson(cat))
-            }
-            return getCat(cat.id, sharedPreferences)
+            return cat
         }
-        fun setAge(value: Long, cat: Cat, sharedPreferences: SharedPreferences): Cat{
+        fun setAge(value: Long, id: Int): Cat{
+            val cat = getCat(id)
             cat.age = value
-            findCat(cat.id)!!.age = value
-            sharedPreferences.edit {
-                putString("${cat.id} cat", Gson().toJson(cat))
-            }
-            return getCat(cat.id, sharedPreferences)
+            return cat
         }
     }
 }

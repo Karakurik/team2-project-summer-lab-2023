@@ -59,9 +59,9 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
             onItemClick = {product ->
                 if (product.open) {
                     val id = sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
-                    var cat = Cat.getCat(id, sharedPreferences!!)
+                    var cat = Cat.getCat(id)
                     if (!cat.isBusy) {
-                        cat = Cat.setBusy(true,cat,sharedPreferences!!)
+                        cat = Cat.setBusy(true,id)
                         if (cat.hunger < 100) {
                             sharedPreferences?.edit {
                                 putInt(
@@ -73,7 +73,7 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
                                 )
                             }
                         }
-                        cat = Cat.setHunger(cat.hunger + product.restoring, cat, sharedPreferences!!)
+                        cat = Cat.setHunger(cat.hunger + product.restoring, id)
                         requireActivity().findViewById<TextView>(R.id.tv_care_points_value).text =
                             "Очки заботы: ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
                         kitchenTimer?.cancel()
@@ -90,7 +90,7 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
                         activity.animations[cat.animations.eat]?.alpha = 255
                         activity.animations[cat.currentAnimation]?.alpha = 0
                         activity.animations[cat.animations.eat]?.start()
-                        cat = Cat.setCurrentAnimation(cat.animations.eat, cat, sharedPreferences!!)
+                        cat = Cat.setCurrentAnimation(cat.animations.eat, id)
                         kitchenTimerTask = KitchenTimerTask(activity, cat)
                         kitchenTimer!!.schedule(kitchenTimerTask, sum.toLong())
                     } else {
@@ -153,7 +153,7 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
                 activity.animations[cat.animations.eat]?.alpha = 0
                 activity.animations[cat.animations.eat]?.stop()
                 cat = activity.setDefaultAnimation(cat)
-                activity.sharedPreferences?.let { Cat.setBusy(false, cat, it) }
+                activity.sharedPreferences?.let { Cat.setBusy(false, cat.id) }
             })
         }
 

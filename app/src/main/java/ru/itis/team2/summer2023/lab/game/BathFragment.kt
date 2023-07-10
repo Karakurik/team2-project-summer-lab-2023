@@ -31,9 +31,9 @@ class BathFragment : Fragment(R.layout.fragment_bath) {
 
         binding?.btnWash?.setOnClickListener {
             val id = sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
-            var cat = Cat.getCat(id, sharedPreferences!!)
+            var cat = Cat.getCat(id)
             if (!cat.isBusy) {
-                cat = Cat.setBusy(true,cat,sharedPreferences!!)
+                cat = Cat.setBusy(true,id)
                 if (cat.purity < 100) {
                     sharedPreferences?.edit {
                         putInt(
@@ -45,7 +45,7 @@ class BathFragment : Fragment(R.layout.fragment_bath) {
                         )
                     }
                 }
-                cat = Cat.setPurity(cat.purity + Constants.STANDART_INCREASE_CAT_VALUES, cat, sharedPreferences!!)
+                cat = Cat.setPurity(cat.purity + Constants.STANDART_INCREASE_CAT_VALUES, id)
                 requireActivity().findViewById<TextView>(R.id.tv_care_points_value).text =
                     "Очки заботы: ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
                 bathTimer?.cancel()
@@ -62,7 +62,7 @@ class BathFragment : Fragment(R.layout.fragment_bath) {
                 activity.animations[cat.animations.wash]?.alpha = 255
                 activity.animations[cat.currentAnimation]?.alpha = 0
                 activity.animations[cat.animations.wash]?.start()
-                cat = Cat.setCurrentAnimation(cat.animations.wash, cat, sharedPreferences!!)
+                cat = Cat.setCurrentAnimation(cat.animations.wash, id)
                 bathTimerTask = BathTimerTask(activity, cat)
                 bathTimer!!.schedule(bathTimerTask, sum.toLong())
             } else {
@@ -89,7 +89,7 @@ class BathFragment : Fragment(R.layout.fragment_bath) {
                 activity.animations[cat.animations.wash]?.alpha = 0
                 activity.animations[cat.animations.wash]?.stop()
                 cat = activity.setDefaultAnimation(cat)
-                activity.sharedPreferences?.let { Cat.setBusy(false, cat, it) }
+                activity.sharedPreferences?.let { Cat.setBusy(false, cat.id) }
             })
         }
 
