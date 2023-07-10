@@ -1,5 +1,6 @@
 package ru.itis.team2.summer2023.lab.start
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -33,7 +34,10 @@ class StartFragment : Fragment(R.layout.fragment_start) {
             }
             
             btnHelp.setOnClickListener {
-                findNavController().navigate(R.id.action_startFragment_to_helpFragment)
+                val dialog = AlertDialog.Builder(activity, R.style.MyAlertDialogTheme)
+                    .setMessage(getString(R.string.learning_text)).create()
+                dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
+                dialog.show()
             }
 
             btnSettings.setOnClickListener {

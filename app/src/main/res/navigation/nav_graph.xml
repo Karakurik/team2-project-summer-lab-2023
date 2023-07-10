@@ -11,9 +11,6 @@
         android:label="fragment_start"
         tools:layout="@layout/fragment_start" >
         <action
-            android:id="@+id/action_startFragment_to_helpFragment"
-            app:destination="@id/helpFragment" />
-        <action
             android:id="@+id/action_startFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
         <action
@@ -33,9 +30,4 @@
             android:id="@+id/action_catalogFragment_self"
             app:destination="@id/catalogFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/helpFragment"
-        android:name="ru.itis.team2.summer2023.lab.start.HelpFragment"
-        android:label="fragment_help"
-        tools:layout="@layout/fragment_help" />
 </navigation>

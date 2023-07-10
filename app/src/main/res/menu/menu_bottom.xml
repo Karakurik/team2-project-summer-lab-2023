@@ -17,9 +17,5 @@
         android:id="@+id/sleepFragment"
         android:icon="@drawable/sleep"
         android:title="@string/sleep"/>
-    <item
-        android:id="@+id/infoFragment"
-        android:icon="@drawable/stats"
-        android:title="@string/info"/>
 
 </menu>

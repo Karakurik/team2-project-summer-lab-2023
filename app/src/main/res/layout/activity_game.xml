@@ -101,7 +101,7 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
-        app:layout_constraintTop_toBottomOf="@id/pb_happy"/>
+        app:layout_constraintTop_toBottomOf="@id/iv_happy"/>
     <ImageView
         android:id="@+id/iv_cat_sleeping"
         android:layout_width="0dp"
@@ -149,6 +149,7 @@
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:progressTint="@color/accent"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toStartOf="@id/pb_purity"
         app:layout_constraintStart_toStartOf="parent"
@@ -168,6 +169,7 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:progressTint="@color/accent"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toStartOf="@id/pb_happy"
         app:layout_constraintStart_toEndOf="@id/pb_hunger"
@@ -188,6 +190,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:progressTint="@color/accent"
         app:layout_constraintEnd_toStartOf="@id/pb_sleep"
         app:layout_constraintStart_toEndOf="@+id/pb_purity"
         app:layout_constraintTop_toBottomOf="@id/btn_to_start" />
@@ -208,6 +211,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:progressTint="@color/accent"
         app:layout_constraintStart_toEndOf="@+id/pb_happy"
         app:layout_constraintTop_toBottomOf="@id/btn_to_start"
         />
