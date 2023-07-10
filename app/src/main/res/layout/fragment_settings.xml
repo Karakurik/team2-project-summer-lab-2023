@@ -113,20 +113,25 @@
         app:layout_constraintStart_toStartOf="@id/sb_green"
         app:layout_constraintEnd_toEndOf="@id/sb_green"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_language"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_color"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:textColor="@color/darc_accent"
-        android:layout_marginHorizontal="128dp"
-        android:layout_marginVertical="24dp"
-        android:background="@drawable/background_button"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="2:1"
         app:layout_constraintTop_toBottomOf="@id/sb_blue"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:textSize="20sp"
-        android:text="@string/change_language"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="128dp"
+        android:layout_marginTop="32dp"
+        app:cardBackgroundColor="@color/black">
+
+        <View
+            android:id="@+id/color"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginVertical="4dp"
+            android:background="@color/white" />
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

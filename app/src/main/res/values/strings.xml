@@ -113,5 +113,10 @@
     <string name="cp">ОЗ:</string>
     <string name="age">Возраст:</string>
     <string name="breed">Порода:</string>
-
+    <string name="fish">рыба</string>
+    <string name="sausage">колбаса</string>
+    <string name="milk">молоко</string>
+    <string name="catjelly">желе</string>
+    <string name="surprise">сюрприз</string>
+    <string name="busy">ваш котик уже занят прямо сейчас</string>
 </resources>

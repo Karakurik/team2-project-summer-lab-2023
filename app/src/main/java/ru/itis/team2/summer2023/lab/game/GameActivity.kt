@@ -53,7 +53,7 @@ class GameActivity : AppCompatActivity() {
             cat = Cat.setAge(System.currentTimeMillis(), id)
         }
         initAnimations(cat)
-        binding.tvCarePointsValue.text = "Очки заботы: ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
+        binding.tvCarePointsValue.text = "${getString(R.string.care_points)} ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
         cat = Cat.setBusy(false, id)
         cat = setDefaultAnimation(cat)
 
