@@ -11,7 +11,7 @@ class ProductItem (
 
         fun onBind(product: Product){
             binding.run{
-                tvName.text = product.name
+                tvName.text = binding.root.context.getString(product.name)
 
                 tvPoints.text = "+ ${product.restoring}"
 

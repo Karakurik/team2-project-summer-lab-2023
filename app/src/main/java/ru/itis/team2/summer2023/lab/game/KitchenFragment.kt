@@ -50,6 +50,7 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Cat.updateSharedPrefs(sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF), sharedPreferences!!)
         binding = null
     }
 
@@ -95,7 +96,7 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
                         kitchenTimerTask = KitchenTimerTask(activity, cat)
                         kitchenTimer!!.schedule(kitchenTimerTask, sum.toLong())
                     } else {
-                        binding?.let { Snackbar.make(it.root, "ваш котик уже занят прямо сейчас", Snackbar.LENGTH_SHORT).show() }
+                        binding?.let { Snackbar.make(it.root, getString(R.string.busy), Snackbar.LENGTH_SHORT).show() }
                     }
                 }
                 else {

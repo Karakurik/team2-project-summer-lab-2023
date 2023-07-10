@@ -50,10 +50,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 checkText()
             }
 
-            btnLanguage.setOnClickListener{
-
-            }
-
             sbRed.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
                 override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                     setColor(sbRed.progress, sbGreen.progress, sbBlue.progress)

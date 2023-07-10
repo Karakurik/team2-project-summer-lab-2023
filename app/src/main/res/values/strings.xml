@@ -134,5 +134,10 @@
         Они станут вашими верными друзьями и позволят вам испытать радость заботы о них.\n
         Удачи!
 </string>
-
+    <string name="fish">рыба</string>
+    <string name="sausage">колбаса</string>
+    <string name="milk">молоко</string>
+    <string name="catjelly">желе</string>
+    <string name="surprise">сюрприз</string>
+    <string name="busy">ваш котик уже занят прямо сейчас</string>
 </resources>
