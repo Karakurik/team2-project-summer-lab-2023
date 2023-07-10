@@ -4,15 +4,23 @@ import android.content.Context
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
+import ru.itis.team2.summer2023.lab.Cat
+import ru.itis.team2.summer2023.lab.Constants
 import ru.itis.team2.summer2023.lab.Constants.Companion.MUSIC
 import ru.itis.team2.summer2023.lab.Constants.Companion.SOUND
 import ru.itis.team2.summer2023.lab.R
 import ru.itis.team2.summer2023.lab.databinding.FragmentPlayBinding
+import java.util.Timer
+import java.util.TimerTask
 
 class PlayFragment : Fragment(R.layout.fragment_play) {
     private var binding: FragmentPlayBinding? = null
+    private var meowTimer: Timer? = null
+    private var meowTimerTask: MeowTimerTask? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,18 +36,52 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
 
             var score = 0
             ivMouse.setOnClickListener {
-                if (sharedPreferences?.getBoolean(MUSIC, SOUND) == true) music.start()
+                val id = sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
+                var cat = Cat.getCat(id, sharedPreferences)
+                if (!cat.isBusy) {
+                    cat = Cat.setBusy(true,cat,sharedPreferences)
 
-                score++
-                tvScore.text = getString(R.string.mouse) + " $score"
-                if (score % 15 == 0) {
-                    var carePoints = sharedPreferences?.getInt("care_points", 0)
-                    sharedPreferences?.edit {
-                        putInt("care_points", carePoints!! + 1)
+                    if (sharedPreferences.getBoolean(MUSIC, SOUND)) music.start()
+                    score++
+                    tvScore.text = getString(R.string.mouse) + " $score"
+                    if (score % Constants.MOUSES == 0) {
+                        val carePoints = sharedPreferences.getInt("care_points", Constants.START_CARE_POINTS)
+                        sharedPreferences.edit {
+                            putInt("care_points", carePoints + Constants.STANDART_INCREASE_CARE_POINTS)
+                        }
+                        requireActivity().findViewById<TextView>(R.id.tv_care_points_value).text =
+                            "Очки заботы: ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
                     }
-                    // здесь ещё нужно поменять текст у текст вью который показывает количество очков заботы
+                    cat = Cat.setHappy(cat.happy + Constants.STANDART_INCREASE_CAT_VALUES, cat, sharedPreferences)
+                    meowTimer?.cancel()
+                    meowTimer = Timer()
+                    val activity = requireActivity() as GameActivity
+                    val num = activity.animations[cat.animations.meow]?.numberOfFrames
+                    var sum = 0
+                    for (i in 0 until num!!){
+                        sum += activity.animations[cat.animations.meow]?.getDuration(i)!!
+                    }
+                    if (activity.animations[cat.currentAnimation]?.isRunning == true){
+                        activity.animations[cat.currentAnimation]?.stop()
+                    }
+                    activity.animations[cat.animations.meow]?.alpha = 255
+                    activity.animations[cat.currentAnimation]?.alpha = 0
+                    activity.animations[cat.animations.meow]?.start()
+                    cat = Cat.setCurrentAnimation(cat.animations.meow, cat, sharedPreferences)
+                    meowTimerTask = MeowTimerTask(activity, cat)
+                    meowTimer!!.schedule(meowTimerTask, sum.toLong())
                 }
             }
+        }
+    }
+    class MeowTimerTask(private val activity: GameActivity, var cat: Cat): TimerTask() {
+        override fun run() {
+            activity.runOnUiThread(Runnable {
+                activity.animations[cat.animations.meow]?.alpha = 0
+                activity.animations[cat.animations.meow]?.stop()
+                cat = activity.setDefaultAnimation(cat)
+                activity.sharedPreferences?.let { Cat.setBusy(false, cat, it) }
+            })
         }
     }
 

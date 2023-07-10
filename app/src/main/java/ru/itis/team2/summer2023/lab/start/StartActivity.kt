@@ -13,7 +13,6 @@ import ru.itis.team2.summer2023.lab.Constants.Companion.SOUND
 import ru.itis.team2.summer2023.lab.R
 import ru.itis.team2.summer2023.lab.databinding.ActivityStartBinding
 import ru.itis.team2.summer2023.lab.game.RecycleView.KitchenRepository
-import ru.itis.team2.summer2023.lab.game.RecycleView.PlayRepository
 
 
 class StartActivity : AppCompatActivity() {
@@ -91,14 +90,6 @@ class StartActivity : AppCompatActivity() {
             for (product in KitchenRepository.list) {
                 sharedPreferences.edit {
                     putString("$index product", gson.toJson(product))
-                    index++
-                }
-            }
-
-            index = 1
-            for (product in PlayRepository.list) {
-                sharedPreferences.edit {
-                    putString("$index game", gson.toJson(product))
                     index++
                 }
             }

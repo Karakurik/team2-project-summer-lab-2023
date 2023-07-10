@@ -59,7 +59,6 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="30dp"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
         app:layout_constraintTop_toBottomOf="@id/pb_happy" />
@@ -70,7 +69,6 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="30dp"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
         app:layout_constraintTop_toBottomOf="@id/pb_happy"/>
@@ -81,7 +79,6 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="30dp"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
         app:layout_constraintTop_toBottomOf="@id/pb_happy"/>
@@ -92,7 +89,6 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="30dp"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
         app:layout_constraintTop_toBottomOf="@id/pb_happy"/>
@@ -103,7 +99,6 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="30dp"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
         app:layout_constraintTop_toBottomOf="@id/pb_happy"/>
@@ -114,7 +109,6 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="30dp"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
         app:layout_constraintTop_toBottomOf="@id/pb_happy"/>
@@ -125,7 +119,6 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="30dp"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintBottom_toTopOf="@id/game_container"
         app:layout_constraintEnd_toEndOf="@id/game_container"
         app:layout_constraintStart_toStartOf="@id/game_container"
         app:layout_constraintTop_toBottomOf="@id/pb_happy"/>

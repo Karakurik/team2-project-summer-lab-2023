@@ -94,7 +94,7 @@ class GameActivity : AppCompatActivity() {
     class PBUpdateTask(private val activity: GameActivity): TimerTask(){
         override fun run() {
             activity.runOnUiThread {
-                var cat = Cat.getCat(
+                val cat = Cat.getCat(
                     activity.sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF),
                     activity.sharedPreferences!!
                 )
@@ -114,8 +114,8 @@ class GameActivity : AppCompatActivity() {
                     activity.sharedPreferences!!
                 )
                 if (!cat.isBusy) {
-                    cat = activity.setDefaultAnimation(cat)
                     cat = Cat.setBusy(true, cat, activity.sharedPreferences!!)
+                    cat = activity.setDefaultAnimation(cat)
                     cat = if (cat.hunger - Constants.LOW_FACTOR > 0) {
                         Cat.setHunger(
                             cat.hunger - Constants.LOW_FACTOR,
@@ -153,24 +153,24 @@ class GameActivity : AppCompatActivity() {
         val score = getTotalScore(cat)
         if (score < 50 && animations[cat.animations.sad]?.alpha != 255){
             if (animations[cat.currentAnimation]?.isRunning == true){
+                animations[cat.currentAnimation]?.alpha = 0
                 animations[cat.currentAnimation]?.stop()
             }
-            animations[cat.animations.idle]?.alpha = 0
             animations[cat.animations.sad]?.alpha = 255
             animations[cat.animations.sad]?.start()
             Cat.setCurrentAnimation(cat.animations.sad, cat, sharedPreferences!!)
-        } else if (score > 50){
+        } else if (score >= 50){
             if (animations[cat.currentAnimation]?.isRunning == true){
+                animations[cat.currentAnimation]?.alpha = 0
                 animations[cat.currentAnimation]?.stop()
             }
-            animations[cat.animations.sad]?.alpha = 0
             animations[cat.animations.idle]?.alpha = 255
             animations[cat.animations.idle]?.start()
             Cat.setCurrentAnimation(cat.animations.idle, cat, sharedPreferences!!)
         }
         return Cat.getCat(cat.id, sharedPreferences!!)
     }
-    fun getTotalScore(cat: Cat): Int{
+    private fun getTotalScore(cat: Cat): Int{
         return ((cat.hunger+cat.happy+cat.purity+cat.sleep)*100/400)
     }
 
@@ -191,7 +191,7 @@ class GameActivity : AppCompatActivity() {
         mp?.pause()
     }
 
-    fun initAnimations(cat: Cat){
+    private fun initAnimations(cat: Cat){
         binding.ivCatIdle.setBackgroundResource(cat.animations.idle)
         binding.ivCatSad.setBackgroundResource(cat.animations.sad)
         binding.ivCatEat.setBackgroundResource(cat.animations.eat)
