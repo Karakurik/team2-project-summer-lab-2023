@@ -155,7 +155,7 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
                 activity.animations[cat.animations.eat]?.alpha = 0
                 activity.animations[cat.animations.eat]?.stop()
                 cat = activity.setDefaultAnimation(cat)
-                activity.sharedPreferences?.let { Cat.setBusy(false, cat.id) }
+                Cat.setBusy(false, cat.id)
             })
         }
     }

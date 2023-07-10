@@ -89,7 +89,7 @@ class BathFragment : Fragment(R.layout.fragment_bath) {
                 activity.animations[cat.animations.wash]?.alpha = 0
                 activity.animations[cat.animations.wash]?.stop()
                 cat = activity.setDefaultAnimation(cat)
-                activity.sharedPreferences?.let { Cat.setBusy(false, cat.id) }
+                Cat.setBusy(false, cat.id)
             })
         }
 

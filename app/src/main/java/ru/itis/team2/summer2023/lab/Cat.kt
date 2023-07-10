@@ -36,6 +36,7 @@ data class Cat(
             cat.sleep = newCat.sleep
             cat.open = newCat.open
             cat.age = newCat.age
+            cat.currentAnimation = newCat.currentAnimation
             return cat
         }
         fun updateSharedPrefs(id: Int, sharedPreferences: SharedPreferences){
