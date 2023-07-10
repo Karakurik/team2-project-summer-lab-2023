@@ -106,7 +106,6 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
             cat.hunger = newCat.hunger
             cat.purity = newCat.purity
             cat.sleep = newCat.sleep
-            cat.age = newCat.age
             index++
         }
     }

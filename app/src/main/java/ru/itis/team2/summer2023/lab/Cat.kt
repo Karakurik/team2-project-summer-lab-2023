@@ -18,7 +18,6 @@ data class Cat(
     var sleep: Int,
     var purity: Int,
     val breed_info : Int,
-    var age: Long,
     var isBusy: Boolean
 ){
     companion object {
@@ -35,7 +34,6 @@ data class Cat(
             cat.purity = newCat.purity
             cat.sleep = newCat.sleep
             cat.open = newCat.open
-            cat.age = newCat.age
             cat.currentAnimation = newCat.currentAnimation
             return cat
         }
@@ -81,11 +79,6 @@ data class Cat(
         fun setBusy(value: Boolean, id: Int): Cat{
             val cat = getCat(id)
             cat.isBusy = value
-            return cat
-        }
-        fun setAge(value: Long, id: Int): Cat{
-            val cat = getCat(id)
-            cat.age = value
             return cat
         }
     }
