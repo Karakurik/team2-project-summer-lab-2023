@@ -1,6 +1,7 @@
 package ru.itis.team2.summer2023.lab.start
 
 import android.content.SharedPreferences
+import android.graphics.Color.WHITE
 import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.core.content.edit
 import com.google.gson.Gson
 import ru.itis.team2.summer2023.lab.CatRepository
 import ru.itis.team2.summer2023.lab.Constants
+import ru.itis.team2.summer2023.lab.Constants.Companion.BACKGROUND_COLOR
 import ru.itis.team2.summer2023.lab.Constants.Companion.MUSIC
 import ru.itis.team2.summer2023.lab.Constants.Companion.SOUND
 import ru.itis.team2.summer2023.lab.R
@@ -82,6 +84,7 @@ class StartActivity : AppCompatActivity() {
                 putInt("care_points", Constants.START_CARE_POINTS)
                 putInt("number_of_cats", Constants.START_CAT_AMOUNT)
                 putBoolean(MUSIC, SOUND)
+                putInt(BACKGROUND_COLOR, WHITE)
             }
 
             index = 1
