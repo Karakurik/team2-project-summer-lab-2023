@@ -1,0 +1,121 @@
+<resources>
+    <string name="app_name">CATcha</string>
+    <string name="kitchen">kitchen</string>
+    <string name="play">game</string>
+    <string name="bath">bathroom</string>
+    <string name="sleep">bedroom</string>
+    <string name="info">info</string>
+    <string name="breed_info_message">инфа о породе</string>
+    <string name="breed_info_title">Breed</string>
+    <string name="breed1">street</string>
+    <string name="breed2">russian blue</string>
+    <string name="breed3">scottish fold</string>
+    <string name="breed1_info">Mongrel cats come in a variety of colors, sizes and shapes.
+        Most often, striped individuals are found among mongrel cats. Usually this color is called "rustic".
+        Most often they are calm, grateful, and respond vividly to the caresses of the owner.
+        Many infections that cats encountered during their wandering life and somehow miraculously survived them are no longer terrible to them;
+        their health is somewhat stronger than their purebred counterparts, therefore, their life expectancy is longer.
+    </string>
+    <string name="breed2_info">Representatives of this breed have an average size and a fairly muscular elongated body.
+        At the same time, their paws are straight and long, with pink-purple pads, and the tail is thin and elongated.
+        The skull of the Russian blue cat is elongated, the muzzle is flat with a straight nose.
+        Her ears are large, pointed and tilted slightly forward. They
+are distinguished by "aristocratic" manners and tact, have a calm disposition and intelligence.
+        Animals are moderately affectionate and accommodating, but at the same time they can be independent, and they will not do something under duress.
+        They are not vindictive, nor are they prone to deliberate sabotage.
+        Russian blue calm tolerates loneliness and gets along well with children — tolerates pranks,
+        without losing his composure and without releasing his claws. Despite this, it is better not to leave her and a small child unattended.
+    </string>
+    <string name="breed3_info">Softness and roundness of forms are the main general characteristics of the appearance of the Scottish fold cat.
+        All body lines must be smooth – no sharp corners.
+        Even the tips of the paws of these cats are small, round and neat.
+        The head of the Scottish fold is often compared to an owl: it should also be of a regular round shape.
+        The cheeks of the Scots are plump and very noticeable, the nose is small, the eyes are large and round.
+        Because of this, cats always look as if slightly surprised.
+        And the color of the pets eyes should match the color of its fur. In
+        addition to the touching appearance, the Scottish fold cat also has a wonderful character.
+        Initially, they were bred exclusively as domestic cats, so they turned out to be calm and affectionate pets,
+        who really appreciate the comfort and convenience. They will be quite comfortable in a city apartment.
+        And the owners will not get tired of an overly energetic cat. The Scottish fold will not suit
+        mad jumps through the rooms, running on tables, cabinets and walls, but from time to time he will not refuse to run for a bow.
+    </string>
+    <string name="advice">advice</string>
+    <string name="red">red</string>
+    <string name="green">green</string>
+    <string name="blue">blue</string>
+    <string name="choose_color">Choose a background color</string>
+    <string name="bath_advice">By nature, cats are very clean.
+        But, one way or another, periodically the owner should wash his pet, especially if he happens to be outside.
+        Frequent washing washes away the protective barrier, and the animals skin may become more sensitive.
+        It is recommended to wash a domestic cat on average once every three months, a street cat - once every 4-6 weeks.
+        The exception is those cases when the animals coat is heavily contaminated or it has parasites.
+        You should plan bathing for a time when the cat is tired and relaxed.
+        For example, after a long game – so she will have less strength to resist.
+        Prepare everything you need for washing in advance – shampoo (special for cats), towel, comb, containers.
+        The bathroom should be warm, about 22-24 degrees.
+        Also prepare a warm place where you can dry the cat
+        (to do this, first wrap the pet in a dry towel, and then you can use a hair dryer at the lowest rpm)
+        If the animal is afraid of the sight of pouring water, fill it in a large basin in advance,
+        gently water the animal, gradually washing off the foam.
+        It is recommended to stroke the cat during the pouring process, evenly distributing water over the coat.
+        The water should be a little warm, but not hot.
+        You can talk to the animal in the process in a calm, friendly voice.
+        This will help him relax a little.
+    </string>
+    <string name="kitchen_advice"> What to consider when choosing a feed: \n
+        - age of the animal — kittens need more high-calorie food, and aging cats need more fiber; \n
+        - individual needs — free range of the animal, overweight, pregnancy; \n
+        - pathologies — for example, with urolithiasis and kidney failure, dietary food is needed. \n
+        Dry and semi-dry food: \n
+        It is most convenient for owners who feed pets on a free schedule:
+        if you pour dry food into a bowl in the morning, it will remain fresh and tasty until the evening.
+        This is also a suitable option for cases when you need to leave for 1-2 days and leave the cat alone.
+        Its main drawback is that there is practically no moisture in it, so the animal should always have
+        fresh water in a bowl, a water dispenser or a drinking fountain. \n
+        Wet food: \n
+        Suitable for sick and recovering cats, as well as old animals who find it difficult to chew pellets-crackers.
+        There is enough liquid in this feed, so cats drink very little.
+        The main disadvantage is that it deteriorates quickly. If the cat did not eat the portion immediately, after half an hour the product is frozen,
+        and by the evening it dries up. \n
+        Experts believe that it is permissible to give a cat both "drying" and canned food at once. But it is important not to mix
+        different types of feed in one bowl and choose the feed from the same manufacturer.
+        Products of different companies are mixed, just to transfer the cat from one species to another.
+
+    </string>
+    <string name="sleep_advice">Healthy sleep of an adult cat should be long, at least 14-16 hours a day.
+        Kittens sleep more than adult pets. The
+pet will sleep well if its other needs are covered.
+        To sleep well, a pet needs a suitable permanent place where he will feel safe.
+        Also, the cat should be well fed and healthy. \n
+For a nocturnal predator, activity in the dark is the norm.
+        But if the cat does not let you sleep at night, you need to think about what to do about it.
+        To rebuild the cats daily routine is real, you need to gradually increase the level of activity in the daytime.
+        If the animal spends a lot of energy during the day, then at night it is guaranteed to be able to sleep soundly.
+Alarm signal – the cat hides under the sofa, in the closet or somewhere else in a place inaccessible to people, and sleeps for a long time.
+        This is a sign of severe stress or illness.</string>
+    <string name="mouse">Mouse cought:</string>
+    <string name="learning">Learning</string>
+    <string name="settings">Settings</string>
+    <string name="catalog">Catalog</string>
+    <string name="start">Start</string>
+    <string name="care_points">Care points:</string>
+    <string name="number_of_cats">Number of available cats:</string>
+    <string name="title1">Do you want to take the cat to yourself?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="title2">You don\'t have enough care points</string>
+    <string name="ok">Ok</string>
+    <string name="on">Turn on the sound</string>
+    <string name="off">Turn off the sound</string>
+    <string name="change_language">Русский</string>
+    <string name="buy">Do you want to buy a product?</string>
+    <string name="cp">CP:</string>
+    <string name="age">Age:</string>
+    <string name="breed">Breed:</string>
+    <string name="fish">fish</string>
+    <string name="sausage">sausage</string>
+    <string name="milk">milk</string>
+    <string name="catjelly">catjelly</string>
+    <string name="surprise">surprise</string>
+    <string name="busy">your cat is already busy right now</string>
+</resources>

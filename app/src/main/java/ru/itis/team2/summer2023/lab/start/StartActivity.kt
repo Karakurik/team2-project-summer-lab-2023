@@ -30,8 +30,6 @@ class StartActivity : AppCompatActivity() {
         mp = MediaPlayer.create(this, R.raw.music_start)
         mp?.setLooping(true)
 
-        // val controller = (supportFragmentManager.findFragmentById(R.id.start_container) as NavHostFragment).navController
-
         //getSharedPreferences("", MODE_PRIVATE).edit().clear().apply(); // это временно чтобы удалять предыдущие записанные значения потом уберем
         initSharedPreference()
     }
@@ -77,8 +75,7 @@ class StartActivity : AppCompatActivity() {
                 }
                 index++
             }
-            // инициализация начального количества очков и айди уличного кота
-            // сначала музыка включена
+
             sharedPreferences?.edit {
                 putInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
                 putInt("care_points", Constants.START_CARE_POINTS)
