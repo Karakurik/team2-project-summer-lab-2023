@@ -58,7 +58,6 @@ class GameActivity : AppCompatActivity() {
             cat = Cat.setBusy(false, id)
             cat = setDefaultAnimation(cat)
         } else {
-            Cat.setCurrentAnimation(cat.animations.sleep, id)
             animations[cat.currentAnimation]?.alpha = 255
             animations[cat.currentAnimation]?.start()
         }
@@ -84,6 +83,7 @@ class GameActivity : AppCompatActivity() {
         }
 
         binding.btnToStart.setOnClickListener {
+            Cat.updateSharedPrefs(sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF), sharedPreferences!!)
             val intent = Intent(this, StartActivity::class.java)
             startActivity(intent)
         }
