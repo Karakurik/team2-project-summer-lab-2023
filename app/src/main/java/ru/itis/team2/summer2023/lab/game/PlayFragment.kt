@@ -31,7 +31,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
         val music: MediaPlayer = MediaPlayer.create(this.context, R.raw.cat)
 
         binding?.run {
-            tvScore.text = getString(R.string.mouse) + " 0"
+            tvScore.text = "${getString(R.string.mouse)} 0"
             motion.transitionToEnd()
 
             var score = 0
@@ -50,7 +50,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
                             putInt("care_points", carePoints + Constants.STANDART_INCREASE_CARE_POINTS)
                         }
                         requireActivity().findViewById<TextView>(R.id.tv_care_points_value).text =
-                            "Очки заботы: ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
+                            "${getString(R.string.care_points)} ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
                     }
                     cat = Cat.setHappy(cat.happy + Constants.STANDART_INCREASE_CAT_VALUES, id)
                     meowTimer?.cancel()

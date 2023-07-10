@@ -1,13 +1,12 @@
 <resources>
     <string name="app_name">CATcha</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="kitchen">кухня</string>
     <string name="play">улица</string>
     <string name="bath">ванная</string>
     <string name="sleep">спальня</string>
     <string name="info">инфа</string>
     <string name="breed_info_message">инфа о породе</string>
-    <string name="breed_info_title">порода</string>
+    <string name="breed_info_title">Порода</string>
     <string name="breed1">уличная</string>
     <string name="breed2">голубая русская</string>
     <string name="breed3">шотландская</string>
@@ -23,5 +22,21 @@
     <string name="kitchen_advice">совет для кухни</string>
     <string name="sleep_advice">котам нужно спать 100 часов. и мне</string>
     <string name="mouse">Пойманных мышей:</string>
+    <string name="learning">Обучение</string>
+    <string name="settings">Настройки</string>
+    <string name="catalog">Каталог</string>
+    <string name="start">Начать</string>
+    <string name="care_points">Очки заботы:</string>
+    <string name="number_of_cats">Число доступных котов:</string>
+    <string name="title1">Хотите забрать кота к себе?</string>
+    <string name="no">Нет</string>
+    <string name="yes">Да</string>
+    <string name="title2">У вас недостаточно очков заботы</string>
+    <string name="ok">Ок</string>
+    <string name="on">Включить звук</string>
+    <string name="off">Выключить звук</string>
+    <string name="change_language">English</string>
+    <string name="buy">Хотите купить продукт?</string>
+    <string name="cp">ОЗ:</string>
 
 </resources>
