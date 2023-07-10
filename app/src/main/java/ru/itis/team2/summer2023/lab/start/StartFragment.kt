@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import ru.itis.team2.summer2023.lab.Constants
 import ru.itis.team2.summer2023.lab.R
 import ru.itis.team2.summer2023.lab.databinding.FragmentStartBinding
 import ru.itis.team2.summer2023.lab.game.GameActivity
@@ -16,6 +18,11 @@ class StartFragment : Fragment(R.layout.fragment_start) {
         binding = FragmentStartBinding.bind(view)
 
         binding?.run{
+            val sharedPreferences = activity?.getSharedPreferences("", AppCompatActivity.MODE_PRIVATE)
+
+            sharedPreferences?.getInt(Constants.BACKGROUND_COLOR, 0)
+                ?.let { startFragment.setBackgroundColor(it) }
+
             btnToGame.setOnClickListener {
                 val intent = Intent(requireContext(), GameActivity::class.java)
                 startActivity(intent)

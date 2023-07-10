@@ -1,5 +1,7 @@
 package ru.itis.team2.summer2023.lab
 
+import java.util.prefs.BackingStoreException
+
 class Constants {
     companion object{
         val LAST_CAT_ID_DEF: Int = 1
