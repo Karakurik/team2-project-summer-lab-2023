@@ -40,7 +40,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
             ivMouse.setOnClickListener {
                 val id = sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
                 var cat = Cat.getCat(id)
-                if (!sharedPreferences!!.getBoolean("LIGHT", true)){
+                if (!sharedPreferences!!.getBoolean("LIGHT_$id", true)){
                     binding?.let { Snackbar.make(it.root, "дайте вашему котику отдохнуть", Snackbar.LENGTH_SHORT).show() }
                 }
                 if (!cat.isBusy) {

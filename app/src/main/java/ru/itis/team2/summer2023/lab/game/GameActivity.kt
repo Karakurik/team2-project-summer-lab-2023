@@ -54,7 +54,7 @@ class GameActivity : AppCompatActivity() {
         }
         initAnimations(cat)
         binding.tvCarePointsValue.text = "Очки заботы: ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
-        if (sharedPreferences!!.getBoolean("LIGHT", true)){
+        if (sharedPreferences!!.getBoolean("LIGHT_$id", true)){
             cat = Cat.setBusy(false, id)
             cat = setDefaultAnimation(cat)
         } else {

@@ -32,8 +32,8 @@ class SleepFragment : Fragment(R.layout.fragment_sleep) {
         binding = FragmentSleepBinding.bind(view)
 
         sharedPreferences = this.activity?.getSharedPreferences("", Context.MODE_PRIVATE)
-        light = sharedPreferences!!.getBoolean("LIGHT", true)
         val id = sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
+        light = sharedPreferences!!.getBoolean("LIGHT_$id", true)
 
         binding?.run {
             btnLight.setOnClickListener {
@@ -82,7 +82,7 @@ class SleepFragment : Fragment(R.layout.fragment_sleep) {
                          //просыпается
                         light = true
                         sharedPreferences!!.edit{
-                            putBoolean("LIGHT", light)
+                            putBoolean("LIGHT_$id", light)
                         }
                         fromSleepTimer?.cancel()
                         fromSleepTimer = Timer()
@@ -151,7 +151,7 @@ class SleepFragment : Fragment(R.layout.fragment_sleep) {
 
                 sleepFragment.light = !sleepFragment.light
                 sleepFragment.sharedPreferences!!.edit{
-                    putBoolean("LIGHT", sleepFragment.light)
+                    putBoolean("LIGHT_${cat.id}", sleepFragment.light)
                 }
 
                 sleepTimer?.cancel()
@@ -168,7 +168,7 @@ class SleepFragment : Fragment(R.layout.fragment_sleep) {
             override fun run() {
                 activity.runOnUiThread {
                     cat = Cat.getCat(cat.id)
-                    if (!sleepFragment.sharedPreferences!!.getBoolean("LIGHT", true)){
+                    if (!sleepFragment.sharedPreferences!!.getBoolean("LIGHT_${cat.id}", true)){
                         cat = if (cat.hunger - Constants.LOW_FACTOR/2 > 0) {
                             Cat.setHunger(
                                 cat.hunger - Constants.LOW_FACTOR/2,
