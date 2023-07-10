@@ -36,8 +36,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
         binding?.run{
             sharedPreferences?.getInt(BACKGROUND_COLOR, 0)?.let {
-                color.setBackgroundColor(it)
+                settingsFragment.setBackgroundColor(it)
             }
+
             sbRed.progress = sharedPreferences?.getInt(COLOR_RED, 255)!!
             sbGreen.progress = sharedPreferences?.getInt(COLOR_GREEN, 255)!!
             sbBlue.progress = sharedPreferences?.getInt(COLOR_BLUE, 255)!!
@@ -103,7 +104,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         sharedPreferences?.edit {
             putInt(BACKGROUND_COLOR, back_color)
         }
-        binding?.color?.setBackgroundColor(back_color)
+        binding?.settingsFragment?.setBackgroundColor(back_color)
     }
 
     fun toHexColor(red:Int, green:Int, blue:Int): String {

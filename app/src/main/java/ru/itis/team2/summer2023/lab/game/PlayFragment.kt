@@ -38,6 +38,9 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
             ivMouse.setOnClickListener {
                 val id = sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF)
                 var cat = Cat.getCat(id)
+                if (!sharedPreferences.getBoolean("LIGHT", true)){
+                    binding?.let { Snackbar.make(it.root, "дайте вашему котику отдохнуть", Snackbar.LENGTH_SHORT).show() }
+                }
                 if (!cat.isBusy) {
                     cat = Cat.setBusy(true,id)
 
@@ -80,7 +83,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
                 activity.animations[cat.animations.meow]?.alpha = 0
                 activity.animations[cat.animations.meow]?.stop()
                 cat = activity.setDefaultAnimation(cat)
-                activity.sharedPreferences?.let { Cat.setBusy(false, cat.id) }
+                Cat.setBusy(false, cat.id)
             })
         }
     }

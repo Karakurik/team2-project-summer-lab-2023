@@ -45,6 +45,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginBottom="8dp"
             android:textSize="14sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/tv_care_points"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
