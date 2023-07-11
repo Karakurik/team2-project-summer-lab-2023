@@ -53,7 +53,16 @@ class GameActivity : AppCompatActivity() {
         binding.tvCarePointsValue.text = "Очки заботы: ${sharedPreferences!!.getInt("care_points", Constants.START_CARE_POINTS)}"
         if (sharedPreferences!!.getBoolean("LIGHT_$id", true)){
             cat = Cat.setBusy(false, id)
-            cat = setDefaultAnimation(cat)
+            val score = getTotalScore(cat)
+            if (score < 50){
+                animations[cat.animations.sad]?.alpha = 255
+                animations[cat.animations.sad]?.start()
+                cat = Cat.setCurrentAnimation(cat.animations.sad, cat.id)
+            } else {
+                animations[cat.animations.idle]?.alpha = 255
+                animations[cat.animations.idle]?.start()
+                cat = Cat.setCurrentAnimation(cat.animations.idle, cat.id)
+            }
         } else {
             animations[cat.currentAnimation]?.alpha = 255
             animations[cat.currentAnimation]?.start()
@@ -100,7 +109,12 @@ class GameActivity : AppCompatActivity() {
     class PBUpdateTask(private val activity: GameActivity): TimerTask(){
         override fun run() {
             activity.runOnUiThread {
-                val cat = Cat.getCat(activity.sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF))
+                var cat = Cat.getCat(activity.sharedPreferences!!.getInt("last_cat_id", Constants.LAST_CAT_ID_DEF))
+                if(!cat.isBusy){
+                    Cat.setBusy(true, cat.id)
+                    cat = activity.setDefaultAnimation(cat)
+                    Cat.setBusy(false, cat.id)
+                }
                 activity.binding.pbHappy.progress = cat.happy
                 activity.binding.pbHunger.progress = cat.hunger
                 activity.binding.pbPurity.progress = cat.purity
@@ -116,7 +130,6 @@ class GameActivity : AppCompatActivity() {
                 var cat = Cat.getCat(id)
                 if (!cat.isBusy) {
                     cat = Cat.setBusy(true, id)
-                    cat = activity.setDefaultAnimation(cat)
                     cat = if (cat.hunger - Constants.LOW_FACTOR > 0) {
                         Cat.setHunger(
                             cat.hunger - Constants.LOW_FACTOR,
@@ -148,7 +161,7 @@ class GameActivity : AppCompatActivity() {
     }
     fun setDefaultAnimation(cat:Cat): Cat{
         val score = getTotalScore(cat)
-        if (score < 50 && animations[cat.animations.sad]?.alpha != 255){
+        if (score < 50 && cat.currentAnimation != cat.animations.sad){
             if (animations[cat.currentAnimation]?.isRunning == true){
                 animations[cat.currentAnimation]?.alpha = 0
                 animations[cat.currentAnimation]?.stop()
@@ -156,7 +169,7 @@ class GameActivity : AppCompatActivity() {
             animations[cat.animations.sad]?.alpha = 255
             animations[cat.animations.sad]?.start()
             Cat.setCurrentAnimation(cat.animations.sad, cat.id)
-        } else if (score >= 50 && animations[cat.animations.idle]?.alpha != 255){
+        } else if (score >= 50 && cat.currentAnimation != cat.animations.idle){
             if (animations[cat.currentAnimation]?.isRunning == true){
                 animations[cat.currentAnimation]?.alpha = 0
                 animations[cat.currentAnimation]?.stop()
