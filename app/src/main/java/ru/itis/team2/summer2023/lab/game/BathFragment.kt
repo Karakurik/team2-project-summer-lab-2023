@@ -87,8 +87,8 @@ class BathFragment : Fragment(R.layout.fragment_bath) {
     class BathTimerTask(private val activity: GameActivity, var cat: Cat): TimerTask(){
         override fun run() {
             activity.runOnUiThread (Runnable {
-                activity.animations[cat.animations.wash]?.alpha = 0
-                activity.animations[cat.animations.wash]?.stop()
+                activity.animations[cat.currentAnimation]?.alpha = 0
+                activity.animations[cat.currentAnimation]?.stop()
                 cat = activity.setDefaultAnimation(cat)
                 Cat.setBusy(false, cat.id)
             })

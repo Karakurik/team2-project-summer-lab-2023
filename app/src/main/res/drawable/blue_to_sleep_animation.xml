@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item android:drawable="@drawable/sleep_blue1"
+        android:duration="100"/>
+    <item android:drawable="@drawable/sleep_blue2"
+        android:duration="100"/>
+    <item android:drawable="@drawable/sleep_blue3"
+        android:duration="100"/>
+    <item android:drawable="@drawable/sleep_blue4"
+        android:duration="100"/>
+    <item android:drawable="@drawable/sleep_blue5"
+        android:duration="100"/>
+    <item android:drawable="@drawable/sleep_blue6"
+        android:duration="100"/>
+    <item android:drawable="@drawable/sleep_blue7"
+        android:duration="100"/>
+    <item android:drawable="@drawable/sleep_blue8"
+        android:duration="100"/>
+    <item android:drawable="@drawable/sleep_blue9"
+        android:duration="100"/>
+    <item android:drawable="@drawable/sleep_blue10"
+        android:duration="100"/>
+    <item android:drawable="@drawable/sleep_blue11"
+        android:duration="100"/>
+    <item android:drawable="@drawable/sleep_blue12"
+        android:duration="100"/>
+    <item android:drawable="@drawable/sleep_blue13"
+        android:duration="100"/>
+</animation-list>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item android:drawable="@drawable/blue_sad1"
+        android:duration="125"/>
+    <item android:drawable="@drawable/blue_sad2"
+        android:duration="125"/>
+    <item android:drawable="@drawable/blue_sad3"
+        android:duration="125"/>
+    <item android:drawable="@drawable/blue_sad4"
+        android:duration="125"/>
+    <item android:drawable="@drawable/blue_sad5"
+        android:duration="125"/>
+    <item android:drawable="@drawable/blue_sad6"
+        android:duration="125"/>
+    <item android:drawable="@drawable/blue_sad7"
+        android:duration="125"/>
+    <item android:drawable="@drawable/blue_sad8"
+        android:duration="125"/>
+    <item android:drawable="@drawable/blue_sad9"
+        android:duration="125"/>
+    <item android:drawable="@drawable/blue_sad10"
+        android:duration="125"/>
+    <item android:drawable="@drawable/blue_sad11"
+        android:duration="125"/>
+    <item android:drawable="@drawable/blue_sad12"
+        android:duration="125"/>
+    <item android:drawable="@drawable/blue_sad13"
+        android:duration="125"/>
+</animation-list>
