@@ -17,7 +17,7 @@ class Constants {
         val COLOR_GREEN: String = "COLOR_GREEN"
         val COLOR_BLUE: String = "COLOR_BLUE"
         val STANDART_INCREASE_CAT_VALUES: Int = 10
-        val STANDART_INCREASE_CARE_POINTS: Int = 10
+        val STANDART_INCREASE_CARE_POINTS: Int = 5
         val MOUSES: Int = 15
     }
 }
