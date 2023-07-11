@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
-    android:id="@+id/cv_view"
+    android:id="@+id/cv_cat"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,7 +9,7 @@
     android:layout_marginHorizontal="8dp"
     android:background="@color/white"
     android:foreground="?selectableItemBackground"
-    app:cardCornerRadius="8dp"
+    app:cardCornerRadius="0dp"
     app:cardElevation="8dp"
     android:layout_marginTop="8dp">
 

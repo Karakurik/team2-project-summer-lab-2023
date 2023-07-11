@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -153,8 +154,8 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
     class KitchenTimerTask(private val activity: GameActivity, var cat: Cat): TimerTask(){
         override fun run() {
             activity.runOnUiThread (Runnable {
-                activity.animations[cat.animations.eat]?.alpha = 0
-                activity.animations[cat.animations.eat]?.stop()
+                activity.animations[cat.currentAnimation]?.alpha = 0
+                activity.animations[cat.currentAnimation]?.stop()
                 cat = activity.setDefaultAnimation(cat)
                 Cat.setBusy(false, cat.id)
             })

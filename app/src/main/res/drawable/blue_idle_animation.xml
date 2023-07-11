@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item android:drawable="@drawable/blue_idle1"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle2"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle3"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle4"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle5"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle6"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle7"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle8"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle9"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle10"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle11"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle12"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle13"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle14"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle15"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle16"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle17"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle18"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle19"
+        android:duration="125" />
+    <item android:drawable="@drawable/blue_idle20"
+        android:duration="125" />
+</animation-list>
+

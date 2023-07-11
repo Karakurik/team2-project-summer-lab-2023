@@ -82,8 +82,8 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
     class MeowTimerTask(private val activity: GameActivity, var cat: Cat): TimerTask() {
         override fun run() {
             activity.runOnUiThread(Runnable {
-                activity.animations[cat.animations.meow]?.alpha = 0
-                activity.animations[cat.animations.meow]?.stop()
+                activity.animations[cat.currentAnimation]?.alpha = 0
+                activity.animations[cat.currentAnimation]?.stop()
                 cat = activity.setDefaultAnimation(cat)
                 Cat.setBusy(false, cat.id)
             })

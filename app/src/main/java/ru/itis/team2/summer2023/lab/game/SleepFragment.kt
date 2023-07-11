@@ -102,8 +102,6 @@ class SleepFragment : Fragment(R.layout.fragment_sleep) {
                         fromSleepTimerTask = FromSleepTimerTask(activity, cat)
                         fromSleepTimer!!.schedule(fromSleepTimerTask, sum.toLong() - 100L)
                     }
-                } else {
-                    binding?.let { Snackbar.make(it.root, "ваш котик уже занят прямо сейчас", Snackbar.LENGTH_SHORT).show() }
                 }
             }
 
@@ -126,8 +124,8 @@ class SleepFragment : Fragment(R.layout.fragment_sleep) {
         ): TimerTask(){
         override fun run() {
             activity.runOnUiThread (Runnable {
-                activity.animations[cat.animations.fromSleep]?.alpha = 0
-                activity.animations[cat.animations.fromSleep]?.stop()
+                activity.animations[cat.currentAnimation]?.alpha = 0
+                activity.animations[cat.currentAnimation]?.stop()
                 cat = activity.setDefaultAnimation(cat)
                 Cat.setBusy(false, cat.id)
             })
@@ -143,8 +141,8 @@ class SleepFragment : Fragment(R.layout.fragment_sleep) {
         private var sleepTimerTask: SleepTimerTask? = null
         override fun run() {
             activity.runOnUiThread (Runnable {
-                activity.animations[cat.animations.toSleep]?.alpha = 0
-                activity.animations[cat.animations.toSleep]?.stop()
+                activity.animations[cat.currentAnimation]?.alpha = 0
+                activity.animations[cat.currentAnimation]?.stop()
                 activity.animations[cat.animations.sleep]?.alpha = 255
                 activity.animations[cat.animations.sleep]?.start()
                 cat = Cat.setCurrentAnimation(cat.animations.sleep, cat.id)
