@@ -66,13 +66,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
                     for (i in 0 until num!!){
                         sum += activity.animations[cat.animations.meow]?.getDuration(i)!!
                     }
-                    if (activity.animations[cat.currentAnimation]?.isRunning == true){
-                        activity.animations[cat.currentAnimation]?.stop()
-                    }
-                    activity.animations[cat.animations.meow]?.alpha = 255
-                    activity.animations[cat.currentAnimation]?.alpha = 0
-                    activity.animations[cat.animations.meow]?.start()
-                    cat = Cat.setCurrentAnimation(cat.animations.meow, id)
+                    cat = Cat.setCurrentAnimation(cat.animations.meow, id, activity.animations)
                     meowTimerTask = MeowTimerTask(activity, cat)
                     meowTimer!!.schedule(meowTimerTask, sum.toLong())
                 }
@@ -80,10 +74,9 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
         }
     }
     class MeowTimerTask(private val activity: GameActivity, var cat: Cat): TimerTask() {
+        @Synchronized
         override fun run() {
             activity.runOnUiThread(Runnable {
-                activity.animations[cat.currentAnimation]?.alpha = 0
-                activity.animations[cat.currentAnimation]?.stop()
                 cat = activity.setDefaultAnimation(cat)
                 Cat.setBusy(false, cat.id)
             })

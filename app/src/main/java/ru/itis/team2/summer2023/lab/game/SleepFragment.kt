@@ -69,13 +69,7 @@ class SleepFragment : Fragment(R.layout.fragment_sleep) {
                         for (i in 0 until num!!){
                             sum += activity.animations[cat.animations.toSleep]?.getDuration(i)!!
                         }
-                        if (activity.animations[cat.currentAnimation]?.isRunning == true){
-                            activity.animations[cat.currentAnimation]?.stop()
-                        }
-                        activity.animations[cat.animations.toSleep]?.alpha = 255
-                        activity.animations[cat.currentAnimation]?.alpha = 0
-                        activity.animations[cat.animations.toSleep]?.start()
-                        cat = Cat.setCurrentAnimation(cat.animations.toSleep, id)
+                        cat = Cat.setCurrentAnimation(cat.animations.toSleep, id, activity.animations)
                         toSleepTimerTask = ToSleepTimerTask(activity, cat, sleepTimer, this@SleepFragment)
                         toSleepTimer!!.schedule(toSleepTimerTask, sum.toLong() - 100L)
                     } else {
@@ -92,13 +86,7 @@ class SleepFragment : Fragment(R.layout.fragment_sleep) {
                         for (i in 0 until num!!){
                             sum += activity.animations[cat.animations.fromSleep]?.getDuration(i)!!
                         }
-                        if (activity.animations[cat.currentAnimation]?.isRunning == true){
-                            activity.animations[cat.currentAnimation]?.stop()
-                        }
-                        activity.animations[cat.animations.fromSleep]?.alpha = 255
-                        activity.animations[cat.currentAnimation]?.alpha = 0
-                        activity.animations[cat.animations.fromSleep]?.start()
-                        cat = Cat.setCurrentAnimation(cat.animations.fromSleep, id)
+                        cat = Cat.setCurrentAnimation(cat.animations.fromSleep, id, activity.animations)
                         fromSleepTimerTask = FromSleepTimerTask(activity, cat)
                         fromSleepTimer!!.schedule(fromSleepTimerTask, sum.toLong() - 100L)
                     }
@@ -122,10 +110,9 @@ class SleepFragment : Fragment(R.layout.fragment_sleep) {
         private val activity: GameActivity,
         var cat: Cat
         ): TimerTask(){
+        @Synchronized
         override fun run() {
             activity.runOnUiThread (Runnable {
-                activity.animations[cat.currentAnimation]?.alpha = 0
-                activity.animations[cat.currentAnimation]?.stop()
                 cat = activity.setDefaultAnimation(cat)
                 Cat.setBusy(false, cat.id)
             })
@@ -139,13 +126,10 @@ class SleepFragment : Fragment(R.layout.fragment_sleep) {
         ): TimerTask(){
 
         private var sleepTimerTask: SleepTimerTask? = null
+        @Synchronized
         override fun run() {
             activity.runOnUiThread (Runnable {
-                activity.animations[cat.currentAnimation]?.alpha = 0
-                activity.animations[cat.currentAnimation]?.stop()
-                activity.animations[cat.animations.sleep]?.alpha = 255
-                activity.animations[cat.animations.sleep]?.start()
-                cat = Cat.setCurrentAnimation(cat.animations.sleep, cat.id)
+                cat = Cat.setCurrentAnimation(cat.animations.sleep, cat.id, activity.animations)
 
                 sleepFragment.light = !sleepFragment.light
                 sleepFragment.sharedPreferences!!.edit{
@@ -163,6 +147,7 @@ class SleepFragment : Fragment(R.layout.fragment_sleep) {
             var cat: Cat,
             private val sleepFragment: SleepFragment
             ): TimerTask(){
+            @Synchronized
             override fun run() {
                 activity.runOnUiThread {
                     cat = Cat.getCat(cat.id)

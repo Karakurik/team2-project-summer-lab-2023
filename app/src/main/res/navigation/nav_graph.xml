@@ -20,6 +20,7 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="ru.itis.team2.summer2023.lab.start.SettingsFragment"
+        tools:layout="@layout/fragment_settings"
         android:label="SettingsFragment" />
     <fragment
         android:id="@+id/catalogFragment"

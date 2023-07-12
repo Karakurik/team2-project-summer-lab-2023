@@ -56,13 +56,7 @@ class BathFragment : Fragment(R.layout.fragment_bath) {
                 for (i in 0 until num!!){
                     sum += activity.animations[cat.animations.wash]?.getDuration(i)!!
                 }
-                if (activity.animations[cat.currentAnimation]?.isRunning == true){
-                    activity.animations[cat.currentAnimation]?.stop()
-                }
-                activity.animations[cat.animations.wash]?.alpha = 255
-                activity.animations[cat.currentAnimation]?.alpha = 0
-                activity.animations[cat.animations.wash]?.start()
-                cat = Cat.setCurrentAnimation(cat.animations.wash, id)
+                cat = Cat.setCurrentAnimation(cat.animations.wash, id, activity.animations)
                 bathTimerTask = BathTimerTask(activity, cat)
                 bathTimer!!.schedule(bathTimerTask, sum.toLong())
             } else {
@@ -85,10 +79,9 @@ class BathFragment : Fragment(R.layout.fragment_bath) {
         binding = null
     }
     class BathTimerTask(private val activity: GameActivity, var cat: Cat): TimerTask(){
+        @Synchronized
         override fun run() {
             activity.runOnUiThread (Runnable {
-                activity.animations[cat.currentAnimation]?.alpha = 0
-                activity.animations[cat.currentAnimation]?.stop()
                 cat = activity.setDefaultAnimation(cat)
                 Cat.setBusy(false, cat.id)
             })
