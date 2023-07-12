@@ -87,13 +87,7 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
                         for (i in 0 until num!!){
                             sum += activity.animations[cat.animations.eat]?.getDuration(i)!!
                         }
-                        if (activity.animations[cat.currentAnimation]?.isRunning == true){
-                            activity.animations[cat.currentAnimation]?.stop()
-                        }
-                        activity.animations[cat.animations.eat]?.alpha = 255
-                        activity.animations[cat.currentAnimation]?.alpha = 0
-                        activity.animations[cat.animations.eat]?.start()
-                        cat = Cat.setCurrentAnimation(cat.animations.eat, id)
+                        cat = Cat.setCurrentAnimation(cat.animations.eat, id, activity.animations)
                         kitchenTimerTask = KitchenTimerTask(activity, cat)
                         kitchenTimer!!.schedule(kitchenTimerTask, sum.toLong())
                     } else {
@@ -152,10 +146,9 @@ class KitchenFragment : Fragment(R.layout.fragment_kitchen) {
         }
     }
     class KitchenTimerTask(private val activity: GameActivity, var cat: Cat): TimerTask(){
+        @Synchronized
         override fun run() {
             activity.runOnUiThread (Runnable {
-                activity.animations[cat.currentAnimation]?.alpha = 0
-                activity.animations[cat.currentAnimation]?.stop()
                 cat = activity.setDefaultAnimation(cat)
                 Cat.setBusy(false, cat.id)
             })
